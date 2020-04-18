@@ -220,6 +220,18 @@ class Song:
         return self.__performed_live_as
 
     @property
+    def is_cover(self):
+        return len(self.cover_of) > 0
+
+    @property
+    def is_live(self):
+        return len(self.live_version_of) > 0
+
+    @property
+    def is_remix(self):
+        return len(self.remix_of) > 0
+
+    @property
     def lyrics(self) -> List[str]:
         return get_lyrics(self.url)
 
