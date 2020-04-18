@@ -9,7 +9,7 @@ def lazy_property(prop):
     def wrapper(*args):
         self = args[0]
         if not self._fully_loaded_:
-            data = self.genius.get_artist_data(self.id)
+            data = self.genius.api.get_artist(self.id)
             self.__init_extra_data__(data)
             self._fully_loaded_ = True
         return prop(self)
