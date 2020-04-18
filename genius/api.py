@@ -12,7 +12,7 @@ class SortingKeys(str, Enum):
     TITLE = "title"
     POPULARITY = "popularity"
 
-    def __str__(self):
+    def __str__(self):  # pragma: no cover
         return self.value
 
 
@@ -41,7 +41,7 @@ class API:
             headers={"Authorization": self.access_token}
         ).json()
 
-        if self.verbose:
+        if self.verbose:  # pragma: no cover
             total = time() - start
             print(f">>> queried {url} in {total:0.4f} seconds")
 

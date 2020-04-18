@@ -16,5 +16,5 @@ class Album(Base):
         self.cover_art_url: str = data.get("cover_art_url")
         self.full_title: str = data.get("full_title")
 
-    def __repr__(self):
+    def __repr__(self):  # pragma: no cover
         return f"{self.name} ({self.id})"

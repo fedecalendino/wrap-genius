@@ -235,5 +235,5 @@ class Song(Base):
     def lyrics(self) -> List[str]:
         return get_lyrics(self.url)
 
-    def __repr__(self):
+    def __repr__(self):  # pragma: no cover
         return f"{self.title} ({self.id})"

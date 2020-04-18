@@ -31,5 +31,5 @@ class SocialMedia:
     def followers(self) -> int:
         return self.__followers
 
-    def __repr__(self):
+    def __repr__(self):  # pragma: no cover
         return self.url

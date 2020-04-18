@@ -68,5 +68,5 @@ class Artist(Base):
     def songs_by_popularity(self) -> Iterator['Song']:
         yield from self.genius.get_all_artist_songs(self.id, sort="popularity")
 
-    def __repr__(self):
+    def __repr__(self):  # pragma: no cover
         return f"{self.name} ({self.id})"

@@ -11,5 +11,5 @@ class Media(Base):
         self.type: str = data.get("type")
         self.url: str = data.get("url")
 
-    def __repr__(self):
+    def __repr__(self):  # pragma: no cover
         return self.url
