@@ -1,5 +1,7 @@
 from .album import Album
 from .artist import Artist
 from .media import Media
-from .stats import Stats
+from .social_media import SocialMedia
 from .song import Song
+from .stats import Stats
+

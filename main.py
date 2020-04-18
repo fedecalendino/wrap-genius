@@ -10,13 +10,15 @@ song = genius.get_song(132997)
 print("Song")
 print(song)
 print(song.release_date)
+print(song.url)
+# print(song.lyrics)
 
 artist = song.primary_artist
 print("Artist:")
 print(artist)
 
-for platform, name in artist.social_media.items():
-    print(" -", platform, ":", name)
+for name, account in artist.social_media.items():
+    print(" -", account, account.followers)
 
 print("Featured Artists:")
 for featured_artist in song.featured_artists:

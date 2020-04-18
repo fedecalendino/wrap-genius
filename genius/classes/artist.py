@@ -1,6 +1,8 @@
 from itertools import count
 from typing import Dict, Iterator, List
 
+from .social_media import SocialMedia
+
 
 def lazy_property(prop):
     @property
@@ -37,11 +39,18 @@ class Artist:
         self.__alternate_names: List[str] = data.get("alternate_names", [])
         self.__description: str = data.get("description")
         self.__followers_count: int = data.get("followers_count", 0)
-        self.__social_media = {
-            "facebook": data.get("facebook_name"),
-            "instagram": data.get("instagram_name"),
-            "twitter": data.get("twitter_name"),
-        }
+
+        self.__social_media = {}
+
+        for network in ["facebook", "instagram", "twitter"]:
+            handle = data.get(f"{network}_name")
+
+            if handle:
+                social_media = SocialMedia(network, handle)
+            else:
+                social_media = None
+
+            self.__social_media[network] = social_media
 
     @lazy_property
     def alternate_names(self) -> List[str]:
@@ -56,7 +65,7 @@ class Artist:
         return self.__followers_count
 
     @lazy_property
-    def social_media(self) -> Dict[str, str]:
+    def social_media(self) -> Dict[str, SocialMedia]:
         return self.__social_media
 
     @property

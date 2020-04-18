@@ -1,6 +1,8 @@
 from datetime import datetime
 from typing import Dict, List
 
+from genius.scrapper import get_lyrics
+
 from .album import Album
 from .artist import Artist
 from .media import Media
@@ -216,6 +218,10 @@ class Song:
     @lazy_property
     def performed_live_as(self) -> List['Song']:
         return self.__performed_live_as
+
+    @property
+    def lyrics(self) -> List[str]:
+        return get_lyrics(self.url)
 
     def __repr__(self):
         return f"{self.title} ({self.id})"
