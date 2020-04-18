@@ -6,7 +6,8 @@ GENIUS_ACCESS_TOKEN = os.getenv("GENIUS_ACCESS_TOKEN")
 
 genius = Genius(GENIUS_ACCESS_TOKEN, verbose=True)
 
-artist = genius.search_artist("Gorillaz")
+artist = genius.search_artist("Daft Punk")
+print(artist)
 print(artist.social_media["instagram"])
 print(artist.social_media["instagram"].followers)
 
