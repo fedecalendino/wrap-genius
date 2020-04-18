@@ -38,9 +38,14 @@ def get_followers(url: str, handle: str) -> int:
         return int(re.sub(r"[^\d]", "", span.text))
 
     if "instagram.com" in url:
-        script = soup.find("script", attrs={"type": "application/ld+json"})
-        data = json.loads(script.string)
-        return int(data["mainentityofpage"]["interactionstatistic"]["userinteractioncount"])
+        script = next(
+            filter(
+                lambda s: len(s.contents) and handle in s.contents[0],
+                soup.find_all("script", attrs={"type": "text/javascript"})
+            )
+        )
+        content = json.loads(script.contents[0].replace("window._shareddata = ", "")[:-1])
+        return content["entry_data"]["profilepage"][0]["graphql"]["user"]["edge_followed_by"]["count"]
 
     if "twitter.com" in url:
         a = soup.find("a", attrs={"href": f"/{handle}/followers"})
