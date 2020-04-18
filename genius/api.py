@@ -23,17 +23,6 @@ class API:
         self.access_token = f"Bearer {access_token}"
         self.verbose = verbose
 
-    def _log(self, **kwargs):
-        if not self.verbose:
-            return
-
-        print()
-
-        for key, value in kwargs.items():
-            print(">>>", key, ":", value)
-
-        print()
-
     def __call__(
         self,
         service: str,
@@ -50,7 +39,9 @@ class API:
             headers={"Authorization": self.access_token}
         ).json()
 
-        end = time()
+        if self.verbose:
+            total = time() - start
+            print(f">>> queried {url} in {total:0.4f} seconds")
 
         meta = response["meta"]
 
@@ -61,7 +52,6 @@ class API:
                 url=url
             )
 
-        self._log(url=url, seconds=end - start)
         return response["response"]
 
     def get_song(self, song_id: int) -> Optional[Dict]:
