@@ -1,6 +1,103 @@
 # wrap-genius
 python wrapper for genius.com API
 
-[![Version](https://img.shields.io/pypi/v/wrap-genius?logo=pypi)](https://pypi.org/project/wrap-genius) [![Build Status](https://img.shields.io/travis/federicocalendino/wrap-genius/master?logo=travis)](https://travis-ci.com/federicocalendino/wrap-genius) [![Quality Gate Status](https://img.shields.io/sonar/alert_status/federicocalendino_wrap-genius?logo=sonarcloud&server=https://sonarcloud.io)](https://sonarcloud.io/dashboard?id=federicocalendino_wrap-genius) [![CodeCoverage](https://img.shields.io/codecov/c/gh/federicocalendino/wrap-genius?logo=codecov)](https://codecov.io/gh/federicocalendino/wrap-genius)
+[![Version](https://img.shields.io/pypi/v/wrap-genius?logo=pypi)](https://pypi.org/project/wrap-genius)
+[![ReadTheDocs](https://img.shields.io/readthedocs/wrap-genius?logo=read%20the%20docs)](https://wrap-genius.readthedocs.io/en/latest/)
+[![Build Status](https://img.shields.io/travis/federicocalendino/wrap-genius/master?logo=travis)](https://travis-ci.com/federicocalendino/wrap-genius)
+[![Quality Gate Status](https://img.shields.io/sonar/alert_status/federicocalendino_wrap-genius?logo=sonarcloud&server=https://sonarcloud.io)](https://sonarcloud.io/dashboard?id=federicocalendino_wrap-genius)
+[![CodeCoverage](https://img.shields.io/codecov/c/gh/federicocalendino/wrap-genius?logo=codecov)](https://codecov.io/gh/federicocalendino/wrap-genius)
+
+
+
+
+## Installation
+
+**wrap-genius** is supported on Python 3.6+ and it can be installed using [pip](https://pypi.python.org/pypi/pip).
+
+```
+pip install wrap-genius
+```
+
+To be able to use it, you'll need to create an API client for [genius.com](https://genius.com/api-clients) and get a **CLIENT ACCESS TOKEN**.
+
+
+## Quickstart
+
+Assuming you already have you access token, get an instance of the genius wrapper as follows:
+
+```python
+from genius import Genius
+
+g = Genius(access_token="YOUR-TOKEN")
+```
+
+With this instance you can interact with genius in many ways:
+```python
+# Search for an artist by name
+artist = g.search_artist("Gorillaz")
+print(artist)
+
+>> "Gorillaz (860)"
+```
+
+```python
+# Get the artist's social media accounts
+instagram = artist.social_media["instagram"]
+print(instagram.handle, instagram.followers)
+
+>> "gorillaz 2277483"
+```
+
+```python
+# Get the artist's song by popularity
+for song in artist.songs_by_popularity:
+    print(song)
+
+>> "Feel Good Inc. (21569)"
+>> "Clint Eastwood (1698)"
+>> "Saturnz Barz (3027437)"
+>> "Ascension (3027418)"
+>> "On Melancholy Hill (53533)"
+>> ...
+```
+
+```python
+# Get the details of a song by its id
+song = g.get_song(song_id=3027414)
+print(song.title_with_featured)
+print(song.release_date_for_display)
+
+>> "Andromeda (Ft. DRAM)"
+>> "March 23, 2017"
+```
+
+```python
+# Get the song album, or the featured artists
+print(song.album)
+for featured in song.featured_artists:
+    print(featured.name)
+
+>> "Humanz (335930)"
+>> "DRAM (241761)"
+```
+
+```python
+# And even, a song's lyrics
+lyrics = song.lyrics
+print('\n'.join(lyrics))
+
+>> "[Verse 1: 2-D]"
+>> "When the pulsing looks to die for"
+>> "Take it in your heart now, lover"
+>> "When the case is out"
+>> "And tired and sodden"
+>> "Take it in your heart"
+>> "Take it in your heart"
+>> ...
+```
+
+## Documentation
+
+https://wrap-genius.readthedocs.io/en/latest/
 
 
