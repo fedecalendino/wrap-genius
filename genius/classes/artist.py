@@ -37,7 +37,7 @@ class Artist:
 
     def __init_extra_data__(self, data):
         self.__alternate_names: List[str] = data.get("alternate_names", [])
-        self.__description: str = data.get("description")
+        self.__description: str = data.get("description", {}).get("plain")
         self.__followers_count: int = data.get("followers_count", 0)
 
         self.__social_media = {}

@@ -3,7 +3,7 @@ from genius.api import Genius
 
 GENIUS_ACCESS_TOKEN = os.getenv("GENIUS_ACCESS_TOKEN")
 
-genius = Genius(GENIUS_ACCESS_TOKEN, verbose=False)
+genius = Genius(GENIUS_ACCESS_TOKEN, verbose=True)
 
 song = genius.get_song(132997)
 
@@ -24,3 +24,7 @@ print("Featured Artists:")
 for featured_artist in song.featured_artists:
     print("*", featured_artist)
 
+
+
+for index, song in enumerate(genius.search_all("Gorillaz"), 1):
+    print(index, song)

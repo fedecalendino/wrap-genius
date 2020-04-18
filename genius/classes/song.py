@@ -51,7 +51,7 @@ class Song:
     def __init_extra_data__(self, data):
         self.__apple_music_id: str = data.get("apple_music_id")
         self.__apple_music_player_url: str = data.get("apple_music_player_url")
-        self.__description: str = data.get("description")
+        self.__description: str = data.get("description", {}).get("plain")
         self.__embed_content: str = data.get("embed_content")
         self.__featured_video: bool = data.get("featured_video", False)
         self.__lyrics_marked_complete_by: str = data.get("lyrics_marked_complete_by")

@@ -1,5 +1,6 @@
+from itertools import count
 from time import time
-from typing import Any, Dict, List
+from typing import Any, Dict, Iterator, List
 
 import requests
 
@@ -29,6 +30,8 @@ class Genius:
         start = time()
         url = f"{self.BASE_URL}/{service}"
 
+        params["text_format"] = "plain"
+
         response = requests.get(
             url=url,
             params=params,
@@ -49,15 +52,28 @@ class Genius:
         self._log(url=url, seconds=end - start)
         return response["response"]
 
-    def search(self, text: str) -> List[Song]:
+    def search(self, text: str, page: int = 1, per_page: int = 20) -> List[Song]:
         assert text
+        assert page > 0
+        assert 21 > per_page > 1
 
-        result = self("search", q=text)
+        result = self("search", q=text, page=page, per_page=per_page)
 
         return list(map(
             lambda hit: Song(self, hit["result"]),
             result.get("hits", [])
         ))
+
+    def search_all(self, text: str) -> Iterator[Song]:
+        page = count(1)
+
+        while True:
+            songs = self.search(text, page=next(page))
+
+            if not songs:
+                break
+
+            yield from songs
 
     def get_artist_data(self, artist_id: int) -> Dict:
         return self(f"artists/{artist_id}")["artist"]
@@ -65,7 +81,7 @@ class Genius:
     def get_artist(self, artist_id: int) -> Artist:
         return Artist(self, self.get_artist_data(artist_id))
 
-    def get_artist_songs(self, artist_id: int, page=1, per_page=50) -> List[Song]:
+    def get_artist_songs(self, artist_id: int, page: int = 1, per_page: int = 50) -> List[Song]:
         assert page > 0
         assert 51 > per_page > 1
 
@@ -81,3 +97,9 @@ class Genius:
 
     def get_song(self, song_id: int) -> Song:
         return Song(self, self.get_song_data(song_id))
+
+    def search_artist(self, name):
+        pass
+
+    def search_song(self, title):
+        pass
