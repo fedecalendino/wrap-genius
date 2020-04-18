@@ -20,6 +20,8 @@ class API:
     BASE_URL = "https://api.genius.com"
 
     def __init__(self, access_token: str, verbose: bool = False):
+        assert access_token
+
         self.access_token = f"Bearer {access_token}"
         self.verbose = verbose
 
