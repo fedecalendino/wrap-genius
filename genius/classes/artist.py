@@ -1,4 +1,4 @@
-from typing import Dict, Iterator, List
+from typing import Dict, Iterator, List, Optional
 
 from .social_media import SocialMedia
 
@@ -39,7 +39,7 @@ class Artist:
         self.__description: str = data.get("description", {}).get("plain")
         self.__followers_count: int = data.get("followers_count", 0)
 
-        self.__social_media = {}
+        self.__social_media: Dict[str, Optional[SocialMedia]] = {}
 
         for network in ["facebook", "instagram", "twitter"]:
             handle = data.get(f"{network}_name")

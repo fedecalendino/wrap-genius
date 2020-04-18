@@ -1,5 +1,6 @@
 from genius.scrapper import get_followers
 
+
 def lazy_property(prop):
     @property
     def wrapper(*args):

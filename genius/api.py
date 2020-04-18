@@ -25,7 +25,12 @@ class Genius:
 
         print()
 
-    def __call__(self, service: str, **params) -> Dict[str, Any]:
+    def __call__(
+        self,
+        service: str,
+        **params
+    ) -> Dict[str, Any]:
+
         start = time()
         url = f"{self.BASE_URL}/{service}"
 
@@ -51,7 +56,13 @@ class Genius:
         self._log(url=url, seconds=end - start)
         return response["response"]
 
-    def search(self, text: str, page: int = 1, per_page: int = 20) -> List[Song]:
+    def search(
+        self,
+        text: str,
+        page: int = 1,
+        per_page: int = 20
+    ) -> List[Song]:
+
         assert text
         assert page > 0
         assert 21 > per_page > 1
@@ -63,7 +74,12 @@ class Genius:
             result.get("hits", [])
         ))
 
-    def search_all(self, text: str, page_limit: int = 10) -> Iterator[Song]:
+    def search_all(
+        self,
+        text: str,
+        page_limit: int = 10
+    ) -> Iterator[Song]:
+
         page = 0
 
         while True:
@@ -90,7 +106,13 @@ class Genius:
 
         return None
 
-    def search_songs(self, title: str, exact: bool = False, page_limit: int = 10) -> Iterator[Song]:
+    def search_songs(
+        self,
+        title: str,
+        exact: bool = False,
+        page_limit: int = 10
+    ) -> Iterator[Song]:
+
         title = title.lower()
 
         for song in self.search_all(title, page_limit=page_limit):
@@ -113,7 +135,14 @@ class Genius:
     def get_artist(self, artist_id: int) -> Artist:
         return Artist(self, self.get_artist_data(artist_id))
 
-    def get_artist_songs(self, artist_id: int, page: int = 1, per_page: int = 50, sort: str = "title") -> List[Song]:
+    def get_artist_songs(
+        self,
+        artist_id: int,
+        page: int = 1,
+        per_page: int = 50,
+        sort: str = "title"
+    ) -> List[Song]:
+        
         assert page > 0
         assert 51 > per_page > 1
 

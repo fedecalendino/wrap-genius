@@ -40,13 +40,11 @@ def get_followers(url: str, handle: str) -> int:
     if "instagram.com" in url:
         script = soup.find("script", attrs={"type": "application/ld+json"})
         data = json.loads(script.string)
-
         return int(data["mainentityofpage"]["interactionstatistic"]["userinteractioncount"])
 
     if "twitter.com" in url:
         a = soup.find("a", attrs={"href": f"/{handle}/followers"})
-        title = a.attrs["title"]
-
+        title = a.attrs.get("title", "0")
         return int(re.sub(r"[^\d]", "", title))
 
-    return -1
+    return 0

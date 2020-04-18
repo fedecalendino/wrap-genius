@@ -5,8 +5,8 @@ class Album:
     def __init__(self, api, data):
         self.api = api
 
-        self.api_path: str = data["api_path"]
         self.id: int = data["id"]
+        self.api_path: str = data["api_path"]
         self.name: str = data["name"]
         self.url: str = data["url"]
 

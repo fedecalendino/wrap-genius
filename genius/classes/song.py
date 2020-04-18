@@ -2,7 +2,6 @@ from datetime import datetime
 from typing import Dict, List, Optional
 
 from genius.scrapper import get_lyrics
-
 from .album import Album
 from .artist import Artist
 from .media import Media
@@ -29,12 +28,12 @@ class Song:
         self.api = api
 
         self.id: int = data["id"]
-        self.title: str = data["title"]
-        self.title_with_featured: str = data["title_with_featured"]
-        self.url: str = data["url"]
         self.api_path: str = data["api_path"]
         self.full_title: str = data["full_title"]
         self.path: str = data["path"]
+        self.title: str = data["title"]
+        self.title_with_featured: str = data["title_with_featured"]
+        self.url: str = data["url"]
 
         self.primary_artist: 'Artist' = Artist(self.api, data["primary_artist"])
         self.stats: Stats = Stats(self.api, data["stats"])
