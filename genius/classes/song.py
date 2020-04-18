@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from genius.scrapper import get_lyrics
 
@@ -35,7 +35,9 @@ class Song:
         self.api_path: str = data["api_path"]
         self.full_title: str = data["full_title"]
         self.path: str = data["path"]
+
         self.primary_artist: 'Artist' = Artist(self.api, data["primary_artist"])
+        self.stats: Stats = Stats(self.api, data["stats"])
 
         self.annotation_count: int = data.get("annotation_count", 0)
         self.header_image_thumbnail_url: str = data.get("header_image_thumbnail_url")
@@ -62,12 +64,16 @@ class Song:
         release_date = data.get("release_date")
 
         if release_date:
-            self.__release_date: datetime = datetime.strptime(release_date, "%Y-%m-%d")
-        else:
-            self.__release_date = None
+            release_date = datetime.strptime(release_date, "%Y-%m-%d")
 
-        self.__stats: Stats = Stats(self.api, data["stats"])
-        self.__album: Album = Album(self.api, data.get("album")) if data.get("album") else None
+        self.__release_date: Optional[datetime] = release_date
+
+        album = data.get("album")
+
+        if album:
+            album = Album(self.api, album)
+
+        self.__album: Optional[Album] = album
 
         self.__media: Dict[str, Media] = dict(map(
             lambda m: (m["provider"], Media(self.api, m)),
@@ -154,10 +160,6 @@ class Song:
     @lazy_property
     def release_date_for_display(self) -> str:
         return self.__release_date_for_display
-
-    @lazy_property
-    def stats(self) -> 'Stats':
-        return self.__stats
 
     @lazy_property
     def album(self) -> 'Album':

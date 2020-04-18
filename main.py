@@ -3,28 +3,10 @@ from genius.api import Genius
 
 GENIUS_ACCESS_TOKEN = os.getenv("GENIUS_ACCESS_TOKEN")
 
-genius = Genius(GENIUS_ACCESS_TOKEN, verbose=True)
+genius = Genius(GENIUS_ACCESS_TOKEN, verbose=False)
 
-song = genius.get_song(132997)
+artist = genius.search_artist("Gorillaz")
 
-print("Song")
-print(song)
-print(song.release_date)
-print(song.url)
-print(song.lyrics)
+for song in artist.songs:
+    print(song.title, song.stats.pageviews)
 
-artist = song.primary_artist
-print("Artist:")
-print(artist)
-
-for name, account in artist.social_media.items():
-    print(" -", account, account.followers)
-
-print("Featured Artists:")
-for featured_artist in song.featured_artists:
-    print("*", featured_artist)
-
-
-
-for index, song in enumerate(genius.search_all("Gorillaz"), 1):
-    print(index, song)

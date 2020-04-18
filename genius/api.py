@@ -1,6 +1,5 @@
-from itertools import count
 from time import time
-from typing import Any, Dict, Iterator, List
+from typing import Any, Dict, Iterator, List, Optional
 
 import requests
 
@@ -64,16 +63,49 @@ class Genius:
             result.get("hits", [])
         ))
 
-    def search_all(self, text: str) -> Iterator[Song]:
-        page = count(1)
+    def search_all(self, text: str, page_limit: int = 10) -> Iterator[Song]:
+        page = 0
 
         while True:
-            songs = self.search(text, page=next(page))
+            page += 1
+
+            if page_limit and page > page_limit:
+                break
+
+            songs = self.search(text, page=page)
 
             if not songs:
                 break
 
             yield from songs
+
+    def search_artist(self, name: str) -> Optional[Artist]:
+        name = name.lower()
+
+        for song in self.search_all(name):
+            artist = song.primary_artist
+
+            if name == artist.name.lower():
+                return artist
+
+        return None
+
+    def search_songs(self, title: str, exact: bool = False, page_limit: int = 10) -> Iterator[Song]:
+        title = title.lower()
+
+        for song in self.search_all(title, page_limit=page_limit):
+            if not exact:
+                if title in song.title.lower():
+                    yield song
+            else:
+                titles = {
+                    song.title.lower(),
+                    song.title_with_featured.lower(),
+                    song.full_title.lower(),
+                }
+
+                if title in titles:
+                    yield song
 
     def get_artist_data(self, artist_id: int) -> Dict:
         return self(f"artists/{artist_id}")["artist"]
@@ -81,11 +113,11 @@ class Genius:
     def get_artist(self, artist_id: int) -> Artist:
         return Artist(self, self.get_artist_data(artist_id))
 
-    def get_artist_songs(self, artist_id: int, page: int = 1, per_page: int = 50) -> List[Song]:
+    def get_artist_songs(self, artist_id: int, page: int = 1, per_page: int = 50, sort: str = "title") -> List[Song]:
         assert page > 0
         assert 51 > per_page > 1
 
-        result = self(f"artists/{artist_id}/songs", page=page, per_page=per_page)
+        result = self(f"artists/{artist_id}/songs", page=page, per_page=per_page, sort=sort)
 
         return list(map(
             lambda song: Song(self, song),
@@ -97,9 +129,3 @@ class Genius:
 
     def get_song(self, song_id: int) -> Song:
         return Song(self, self.get_song_data(song_id))
-
-    def search_artist(self, name):
-        pass
-
-    def search_song(self, title):
-        pass

@@ -1,4 +1,3 @@
-from itertools import count
 from typing import Dict, Iterator, List
 
 from .social_media import SocialMedia
@@ -70,10 +69,11 @@ class Artist:
 
     @property
     def songs(self) -> Iterator['Song']:
-        page = count(1)
+        page = 0
 
         while True:
-            songs = self.api.get_artist_songs(self.id, next(page))
+            page += 1
+            songs = self.api.get_artist_songs(self.id, page=page)
 
             if not songs:
                 break
