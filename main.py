@@ -11,7 +11,7 @@ print("Song")
 print(song)
 print(song.release_date)
 print(song.url)
-# print(song.lyrics)
+print(song.lyrics)
 
 artist = song.primary_artist
 print("Artist:")
