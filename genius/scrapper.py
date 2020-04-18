@@ -30,6 +30,7 @@ def get_lyrics(url: str, attemps_left=3) -> List[str]:
 
 def get_followers(url: str, handle: str) -> int:
     url = url.replace("facebook.com", "business.facebook.com")
+    handle = handle.lower()
     soup = _get_soup(url, lower=True)
 
     if "facebook.com" in url:
