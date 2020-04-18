@@ -1,6 +1,9 @@
-class Stats:
-    def __init__(self, api, data):
-        self.api = api
+from .commons import Base
+
+
+class Stats(Base):
+    def __init__(self, genius, data):
+        super().__init__(genius)
 
         self.concurrents: int = data.get("concurrents", 0)
         self.hot: bool = data.get("hot", False)

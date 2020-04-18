@@ -4,6 +4,7 @@ from typing import Dict, List, Optional
 from genius.scrapper import get_lyrics
 from .album import Album
 from .artist import Artist
+from .commons import Base
 from .media import Media
 from .stats import Stats
 
@@ -13,7 +14,7 @@ def lazy_property(prop):
     def wrapper(*args):
         self = args[0]
         if not self._fully_loaded_:
-            data = self.api.get_song_data(self.id)
+            data = self.genius.get_song_data(self.id)
             self.__init_extra_data__(data)
             self._fully_loaded_ = True
         return prop(self)
@@ -21,11 +22,9 @@ def lazy_property(prop):
     return wrapper
 
 
-class Song:
-    _fully_loaded_: bool = False
-
-    def __init__(self, api, data):
-        self.api = api
+class Song(Base):
+    def __init__(self, genius, data):
+        super().__init__(genius)
 
         self.id: int = data["id"]
         self.api_path: str = data["api_path"]
@@ -35,8 +34,8 @@ class Song:
         self.title_with_featured: str = data["title_with_featured"]
         self.url: str = data["url"]
 
-        self.primary_artist: 'Artist' = Artist(self.api, data["primary_artist"])
-        self.stats: Stats = Stats(self.api, data["stats"])
+        self.primary_artist: 'Artist' = Artist(self.genius, data["primary_artist"])
+        self.stats: Stats = Stats(self.genius, data["stats"])
 
         self.annotation_count: int = data.get("annotation_count", 0)
         self.header_image_thumbnail_url: str = data.get("header_image_thumbnail_url")
@@ -70,32 +69,32 @@ class Song:
         album = data.get("album")
 
         if album:
-            album = Album(self.api, album)
+            album = Album(self.genius, album)
 
         self.__album: Optional[Album] = album
 
         self.__media: Dict[str, Media] = dict(map(
-            lambda m: (m["provider"], Media(self.api, m)),
+            lambda m: (m["provider"], Media(self.genius, m)),
             data.get("media", [])
         ))
 
         self.__featured_artists: List['Artist'] = list(map(
-            lambda fa: Artist(self.api, fa),
+            lambda fa: Artist(self.genius, fa),
             data.get("featured_artists", [])
         ))
         self.__producer_artists: List['Artist'] = list(map(
-            lambda pa: Artist(self.api, pa),
+            lambda pa: Artist(self.genius, pa),
             data.get("producer_artists", [])
         ))
         self.__writer_artists: List['Artist'] = list(map(
-            lambda wa: Artist(self.api, wa),
+            lambda wa: Artist(self.genius, wa),
             data.get("writer_artists", [])
         ))
 
         for relationship in data.get("song_relationships", []):
             type_ = relationship["type"]
             songs = list(map(
-                lambda rs: Song(self.api, rs),
+                lambda rs: Song(self.genius, rs),
                 relationship.get("songs", [])
             ))
 

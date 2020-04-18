@@ -142,16 +142,38 @@ class Genius:
         per_page: int = 50,
         sort: str = "title"
     ) -> List[Song]:
-        
+
         assert page > 0
         assert 51 > per_page > 1
 
-        result = self(f"artists/{artist_id}/songs", page=page, per_page=per_page, sort=sort)
+        result = self(
+            service=f"artists/{artist_id}/songs",
+            page=page,
+            per_page=per_page,
+            sort=sort
+        )
 
         return list(map(
             lambda song: Song(self, song),
             result.get("songs", [])
         ))
+
+    def get_all_artist_songs(
+        self,
+        artist_id: int,
+        sort: str = "title"
+    ) -> List[Song]:
+
+        page = 0
+
+        while True:
+            page += 1
+            songs = self.get_artist_songs(artist_id, page=page, sort=sort)
+
+            if not songs:
+                break
+
+            yield from songs
 
     def get_song_data(self, song_id: int) -> Dict:
         return self(f"songs/{song_id}")["song"]

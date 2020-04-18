@@ -1,5 +1,6 @@
 from typing import Dict, Iterator, List, Optional
 
+from .commons import Base
 from .social_media import SocialMedia
 
 
@@ -8,18 +9,16 @@ def lazy_property(prop):
     def wrapper(*args):
         self = args[0]
         if not self._fully_loaded_:
-            data = self.api.get_artist_data(self.id)
+            data = self.genius.get_artist_data(self.id)
             self.__init_extra_data__(data)
             self._fully_loaded_ = True
         return prop(self)
     return wrapper
 
 
-class Artist:
-    _fully_loaded_: bool = False
-
-    def __init__(self, api, data):
-        self.api = api
+class Artist(Base):
+    def __init__(self, genius, data):
+        super().__init__(genius)
 
         self.id: int = data["id"]
         self.api_path: str = data["api_path"]
@@ -43,13 +42,7 @@ class Artist:
 
         for network in ["facebook", "instagram", "twitter"]:
             handle = data.get(f"{network}_name")
-
-            if handle:
-                social_media = SocialMedia(network, handle)
-            else:
-                social_media = None
-
-            self.__social_media[network] = social_media
+            self.__social_media[network] = SocialMedia(network, handle) if handle else None
 
     @lazy_property
     def alternate_names(self) -> List[str]:
@@ -69,16 +62,11 @@ class Artist:
 
     @property
     def songs(self) -> Iterator['Song']:
-        page = 0
+        yield from self.genius.get_all_artist_songs(self.id)
 
-        while True:
-            page += 1
-            songs = self.api.get_artist_songs(self.id, page=page)
-
-            if not songs:
-                break
-
-            yield from songs
+    @property
+    def songs_by_popularity(self) -> Iterator['Song']:
+        yield from self.genius.get_all_artist_songs(self.id, sort="popularity")
 
     def __repr__(self):
         return f"{self.name} ({self.id})"

@@ -1,6 +1,9 @@
-class Media:
-    def __init__(self, api, data):
-        self.api = api
+from .commons import Base
+
+
+class Media(Base):
+    def __init__(self, genius, data):
+        super().__init__(genius)
 
         self.native_uri: str = data.get("native_uri")
         self.provider: str = data.get("provider")
