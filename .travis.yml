@@ -11,7 +11,7 @@ addons:
 # Install the codecov pip dependency
 install:
   - pip install -r requirements.txt
-  - pip install codecov
+  - pip install -r requirements-test.txt
 
 # Run the unit test
 script:
