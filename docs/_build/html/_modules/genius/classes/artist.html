@@ -79,9 +79,8 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">genius</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.html">genius package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.classes.html">genius.classes package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.html">Code &gt; Main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.classes.html">Code &gt; Classes</a></li>
 </ul>
 
             
@@ -151,7 +150,7 @@
 <span class="kn">from</span> <span class="nn">.social_media</span> <span class="kn">import</span> <span class="n">SocialMedia</span>
 
 
-<div class="viewcode-block" id="lazy_property"><a class="viewcode-back" href="../../../source/genius.classes.html#genius.classes.artist.lazy_property">[docs]</a><span class="k">def</span> <span class="nf">lazy_property</span><span class="p">(</span><span class="n">prop</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">lazy_property</span><span class="p">(</span><span class="n">prop</span><span class="p">):</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="bp">self</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -160,23 +159,47 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__init_extra_data__</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_fully_loaded_</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="n">prop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">wrapper</span></div>
+    <span class="k">return</span> <span class="n">wrapper</span>
 
 
 <div class="viewcode-block" id="Artist"><a class="viewcode-back" href="../../../source/genius.classes.html#genius.classes.artist.Artist">[docs]</a><span class="k">class</span> <span class="nc">Artist</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    id: int</span>
+<span class="sd">        id of the artist.</span>
+<span class="sd">    alternate_names*: list of str</span>
+<span class="sd">        list of the artist&#39;s alternative names.</span>
+<span class="sd">    description*: str</span>
+<span class="sd">        information about the artist.</span>
+<span class="sd">    followers_count*: int</span>
+<span class="sd">        amount of followers in genius.</span>
+<span class="sd">    header_image_url: str</span>
+<span class="sd">        url of the artist&#39;s header image.</span>
+<span class="sd">    image_url: str</span>
+<span class="sd">        url of the artist&#39;s image.</span>
+<span class="sd">    is_verified: bool</span>
+<span class="sd">        flag to indicate if the artist was verified.</span>
+<span class="sd">    name: str</span>
+<span class="sd">        name of the artist.</span>
+<span class="sd">    social_media*: dict of str::class:`~genius.classes.social_media.SocialMedia`</span>
+<span class="sd">        social media accounts of the artist.</span>
+<span class="sd">    url: str</span>
+<span class="sd">        url of the artist in genius.</span>
+<span class="sd">    note:</span>
+<span class="sd">        **the attributes marked with a * will trigger one extra call to the api.**</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">genius</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">genius</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">api_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;api_path&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">header_image_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;header_image_url&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">image_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;image_url&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">iq</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;iq&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_meme_verified</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;is_meme_verified&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_verified</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;is_verified&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__init_extra_data__</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
@@ -186,7 +209,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__followers_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;followers_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__social_media</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SocialMedia</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
-
         <span class="k">for</span> <span class="n">network</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;facebook&quot;</span><span class="p">,</span> <span class="s2">&quot;instagram&quot;</span><span class="p">,</span> <span class="s2">&quot;twitter&quot;</span><span class="p">]:</span>
             <span class="n">handle</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">network</span><span class="si">}</span><span class="s2">_name&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__social_media</span><span class="p">[</span><span class="n">network</span><span class="p">]</span> <span class="o">=</span> <span class="n">SocialMedia</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">handle</span><span class="p">)</span> <span class="k">if</span> <span class="n">handle</span> <span class="k">else</span> <span class="kc">None</span>
@@ -209,10 +231,26 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">songs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="s1">&#39;Song&#39;</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetch all the songs of the artist sorted by **title**.</span>
+
+<span class="sd">        Yields</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`~genius.classes.song.Song`</span>
+<span class="sd">            Song of the artist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">genius</span><span class="o">.</span><span class="n">get_all_artist_songs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">songs_by_popularity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="s1">&#39;Song&#39;</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetch all the songs of the artist sorted by **popularity**.</span>
+
+<span class="sd">        Yields</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`~genius.classes.song.Song`</span>
+<span class="sd">            Song of the artist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">genius</span><span class="o">.</span><span class="n">get_all_artist_songs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="s2">&quot;popularity&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>

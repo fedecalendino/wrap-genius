@@ -16,7 +16,7 @@ class SongTest(TestCase):
         song = self.genius.get_song(3027414)
 
         self.assertEqual(song.title, "Andromeda")
-        self.assertEqual(song.primary_artist.name, "Gorillaz")
+        self.assertEqual(song.artist.name, "Gorillaz")
         self.assertFalse(song._fully_loaded_)
 
         self.assertEqual(song.album.name, "Humanz")
@@ -25,15 +25,15 @@ class SongTest(TestCase):
         self.assertEqual(song.release_date_for_display, "March 23, 2017")
         self.assertTrue(song._fully_loaded_)
 
-        featured = song.featured_artists[0]
+        featured = song.features[0]
         self.assertEqual(featured.id, 241761)
         self.assertEqual(featured.name, "DRAM")
 
-        writer = song.writer_artists[0]
+        writer = song.writers[0]
         self.assertEqual(writer.id, 241761)
         self.assertEqual(writer.name, "DRAM")
 
-        writer = song.writer_artists[1]
+        writer = song.writers[1]
         self.assertEqual(writer.id, 1974)
         self.assertEqual(writer.name, "Damon Albarn")
 
@@ -44,7 +44,7 @@ class SongTest(TestCase):
         song = self.genius.get_song(3027414)
 
         self.assertEqual(song.title, "Andromeda")
-        self.assertEqual(song.primary_artist.name, "Gorillaz")
+        self.assertEqual(song.artist.name, "Gorillaz")
         self.assertFalse(song._fully_loaded_)
 
         lyrics = song.lyrics

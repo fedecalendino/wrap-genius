@@ -17,19 +17,43 @@ def lazy_property(prop):
 
 
 class Artist(Base):
+    """
+    Attributes
+    ----------
+    id: int
+        id of the artist.
+    alternate_names*: list of str
+        list of the artist's alternative names.
+    description*: str
+        information about the artist.
+    followers_count*: int
+        amount of followers in genius.
+    header_image_url: str
+        url of the artist's header image.
+    image_url: str
+        url of the artist's image.
+    is_verified: bool
+        flag to indicate if the artist was verified.
+    name: str
+        name of the artist.
+    social_media*: dict of str::class:`~genius.classes.social_media.SocialMedia`
+        social media accounts of the artist.
+    url: str
+        url of the artist in genius.
+    note:
+        **the attributes marked with a * will trigger one extra call to the api.**
+    """
+
     def __init__(self, genius, data):
         super().__init__(genius)
 
         self.id: int = data["id"]
-        self.api_path: str = data["api_path"]
-        self.name: str = data["name"]
-        self.url: str = data["url"]
 
         self.header_image_url: str = data.get("header_image_url")
         self.image_url: str = data.get("image_url")
-        self.iq: int = data.get("iq", 0)
-        self.is_meme_verified: bool = data.get("is_meme_verified", False)
         self.is_verified: bool = data.get("is_verified", False)
+        self.name: str = data["name"]
+        self.url: str = data["url"]
 
         self.__init_extra_data__(data)
 
@@ -39,7 +63,6 @@ class Artist(Base):
         self.__followers_count: int = data.get("followers_count", 0)
 
         self.__social_media: Dict[str, Optional[SocialMedia]] = {}
-
         for network in ["facebook", "instagram", "twitter"]:
             handle = data.get(f"{network}_name")
             self.__social_media[network] = SocialMedia(network, handle) if handle else None
@@ -62,10 +85,26 @@ class Artist(Base):
 
     @property
     def songs(self) -> Iterator['Song']:
+        """
+        Fetch all the songs of the artist sorted by **title**.
+
+        Yields
+        -------
+        :class:`~genius.classes.song.Song`
+            Song of the artist.
+        """
         yield from self.genius.get_all_artist_songs(self.id)
 
     @property
     def songs_by_popularity(self) -> Iterator['Song']:
+        """
+        Fetch all the songs of the artist sorted by **popularity**.
+
+        Yields
+        -------
+        :class:`~genius.classes.song.Song`
+            Song of the artist.
+        """
         yield from self.genius.get_all_artist_songs(self.id, sort="popularity")
 
     def __repr__(self):  # pragma: no cover

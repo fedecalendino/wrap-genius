@@ -79,9 +79,8 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">genius</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.html">genius package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.classes.html">genius.classes package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.html">Code &gt; Main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.classes.html">Code &gt; Classes</a></li>
 </ul>
 
             
@@ -150,18 +149,30 @@
 
 
 <div class="viewcode-block" id="Album"><a class="viewcode-back" href="../../../source/genius.classes.html#genius.classes.album.Album">[docs]</a><span class="k">class</span> <span class="nc">Album</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    id: int</span>
+<span class="sd">        id of the album.</span>
+<span class="sd">    artist: :class:`~genius.classes.artist.Artist`</span>
+<span class="sd">        artist of the album.</span>
+<span class="sd">    cover_art_url: str</span>
+<span class="sd">        url of the album&#39;s cover image.</span>
+<span class="sd">    name: str</span>
+<span class="sd">        name of the album.</span>
+<span class="sd">    url: str</span>
+<span class="sd">        url of the album in genius.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">genius</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">genius</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">api_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;api_path&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">artist</span><span class="p">:</span> <span class="s1">&#39;Artist&#39;</span> <span class="o">=</span> <span class="n">Artist</span><span class="p">(</span><span class="n">genius</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;artist&quot;</span><span class="p">])</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">cover_art_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cover_art_url&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">full_title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;full_title&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">)&quot;</span></div>

@@ -79,9 +79,8 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../source/modules.html">genius</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../source/genius.html">genius package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../source/genius.classes.html">genius.classes package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/genius.html">Code &gt; Main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/genius.classes.html">Code &gt; Classes</a></li>
 </ul>
 
             
@@ -163,6 +162,20 @@
 
 
 <div class="viewcode-block" id="get_lyrics"><a class="viewcode-back" href="../../source/genius.html#genius.scrapper.get_lyrics">[docs]</a><span class="k">def</span> <span class="nf">get_lyrics</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attemps_left</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Looks for the lyrics of a song in genius.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    url: str</span>
+<span class="sd">        Url of the song in genius.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list of str:</span>
+<span class="sd">        Lines of the lyrics.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">attemps_left</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[]</span>
 
@@ -176,6 +189,22 @@
 
 
 <div class="viewcode-block" id="get_followers"><a class="viewcode-back" href="../../source/genius.html#genius.scrapper.get_followers">[docs]</a><span class="k">def</span> <span class="nf">get_followers</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">handle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Looks for the amount of followers in a given social medial.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    url: str</span>
+<span class="sd">        Url of the profile.</span>
+<span class="sd">    handle: str</span>
+<span class="sd">        Username of the account.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        Amount of followers.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;facebook.com&quot;</span><span class="p">,</span> <span class="s2">&quot;business.facebook.com&quot;</span><span class="p">)</span>
     <span class="n">handle</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     <span class="n">soup</span> <span class="o">=</span> <span class="n">_get_soup</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

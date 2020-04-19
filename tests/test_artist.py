@@ -34,15 +34,15 @@ class ArtistTest(TestCase):
         self.assertTrue(twitter.followers > 3_000_000)
 
         for index, song in enumerate(artist.songs):
-            self.assertEqual(song.primary_artist.id, artist.id)
-            self.assertEqual(song.primary_artist.name, artist.name)
+            self.assertEqual(song.artist.id, artist.id)
+            self.assertEqual(song.artist.name, artist.name)
 
             if index > 10:
                 break
 
         for index, song in enumerate(artist.songs_by_popularity):
-            self.assertEqual(song.primary_artist.id, artist.id)
-            self.assertEqual(song.primary_artist.name, artist.name)
+            self.assertEqual(song.artist.id, artist.id)
+            self.assertEqual(song.artist.name, artist.name)
 
             if index > 10:
                 break

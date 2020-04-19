@@ -79,9 +79,8 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">genius</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.html">genius package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.classes.html">genius.classes package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.html">Code &gt; Main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.classes.html">Code &gt; Classes</a></li>
 </ul>
 
             
@@ -149,12 +148,21 @@
 
 
 <div class="viewcode-block" id="Media"><a class="viewcode-back" href="../../../source/genius.classes.html#genius.classes.media.Media">[docs]</a><span class="k">class</span> <span class="nc">Media</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    provider: str</span>
+<span class="sd">        provider of the media (youtube, spotify, etc.)</span>
+<span class="sd">    type: str</span>
+<span class="sd">        media type (audio/video).</span>
+<span class="sd">    url: str</span>
+<span class="sd">        url of the media.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">genius</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">genius</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">native_uri</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;native_uri&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">provider</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;provider&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;start&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">)</span>
 

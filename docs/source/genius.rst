@@ -1,45 +1,20 @@
-genius package
+Code > Main
 ==============
 
-Subpackages
------------
-
-.. toctree::
-
-    genius.classes
-
-Submodules
-----------
-
-genius.api module
+API
 -----------------
 
 .. automodule:: genius.api
     :members:
-    :undoc-members:
-    :show-inheritance:
 
-genius.exceptions module
+Exceptions
 ------------------------
 
 .. automodule:: genius.exceptions
     :members:
-    :undoc-members:
-    :show-inheritance:
 
-genius.scrapper module
-----------------------
+Scrapper
+------------------------
 
 .. automodule:: genius.scrapper
     :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: genius
-    :members:
-    :undoc-members:
-    :show-inheritance:

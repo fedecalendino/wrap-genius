@@ -13,11 +13,24 @@ def lazy_property(prop):
 
 
 class SocialMedia:
+    """
+    Attributes
+    ----------
+    followers: int
+        Amount of followers in the network.
+    handle: str
+        username in the network.
+    network: str
+        social media network (facebook, instagram, twitter, etc).
+    url: str
+        url in the network.
+    """
+
     _fully_loaded_: bool = False
 
     def __init__(self, network, handle):
-        self.network = network
         self.handle = handle
+        self.network = network
         self.__followers = 0
 
     def __fetch_extra_data__(self):

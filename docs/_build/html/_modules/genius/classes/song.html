@@ -79,9 +79,8 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">genius</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.html">genius package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.classes.html">genius.classes package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.html">Code &gt; Main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/genius.classes.html">Code &gt; Classes</a></li>
 </ul>
 
             
@@ -153,10 +152,9 @@
 <span class="kn">from</span> <span class="nn">.artist</span> <span class="kn">import</span> <span class="n">Artist</span>
 <span class="kn">from</span> <span class="nn">.commons</span> <span class="kn">import</span> <span class="n">Base</span>
 <span class="kn">from</span> <span class="nn">.media</span> <span class="kn">import</span> <span class="n">Media</span>
-<span class="kn">from</span> <span class="nn">.stats</span> <span class="kn">import</span> <span class="n">Stats</span>
 
 
-<div class="viewcode-block" id="lazy_property"><a class="viewcode-back" href="../../../source/genius.classes.html#genius.classes.song.lazy_property">[docs]</a><span class="k">def</span> <span class="nf">lazy_property</span><span class="p">(</span><span class="n">prop</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">lazy_property</span><span class="p">(</span><span class="n">prop</span><span class="p">):</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="bp">self</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -166,74 +164,123 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_fully_loaded_</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="n">prop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">wrapper</span></div>
+    <span class="k">return</span> <span class="n">wrapper</span>
 
 
 <div class="viewcode-block" id="Song"><a class="viewcode-back" href="../../../source/genius.classes.html#genius.classes.song.Song">[docs]</a><span class="k">class</span> <span class="nc">Song</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    id: int</span>
+<span class="sd">        id of the song.</span>
+<span class="sd">    album*: :class:`~genius.classes.album.Album`</span>
+<span class="sd">        album of the song.</span>
+<span class="sd">    apple_music_id*: str</span>
+<span class="sd">        id of the song in apple music.</span>
+<span class="sd">    artist: :class:`~genius.classes.artist.Artist`</span>
+<span class="sd">        primary artist of the song.</span>
+<span class="sd">    cover_of* : list of :class:`~genius.classes.song.Song`</span>
+<span class="sd">        list of songs covered by the song.</span>
+<span class="sd">    covered_by* : list of :class:`~genius.classes.song.Song`</span>
+<span class="sd">        list of songs that cover the song.</span>
+<span class="sd">    description*: str</span>
+<span class="sd">        information about the song.</span>
+<span class="sd">    features*: list of :class:`~genius.classes.artist.Artist`</span>
+<span class="sd">        featured artists of the song.</span>
+<span class="sd">    hot: bool</span>
+<span class="sd">        flag to indicate if the song is populare in genius.</span>
+<span class="sd">    interpolates* : list of :class:`~genius.classes.song.Song`</span>
+<span class="sd">        list of songs interpolated by the song.</span>
+<span class="sd">    interpolated_by* : list of :class:`~genius.classes.song.Song`</span>
+<span class="sd">        list of songs that interpole the song.</span>
+<span class="sd">    is_cover*: bool</span>
+<span class="sd">        flag to indicate if the song is a cover.</span>
+<span class="sd">    is_live*: bool</span>
+<span class="sd">        flag to indicate if the song is a live performance.</span>
+<span class="sd">    is_remix*: bool</span>
+<span class="sd">        flag to indicate if the song is a remix.</span>
+<span class="sd">    media*: dict of str::class:`~genius.classes.media.Media`</span>
+<span class="sd">        collection of multimedia related to the song.</span>
+<span class="sd">    pageviews: int</span>
+<span class="sd">        amount of page views of the song in genius.</span>
+<span class="sd">    producers*: list of :class:`~genius.classes.artist.Artist`</span>
+<span class="sd">        producers of the song.</span>
+<span class="sd">    recording_location*: str</span>
+<span class="sd">        location where the song was recorded.</span>
+<span class="sd">    release_date*: datetime</span>
+<span class="sd">        released date of the song.</span>
+<span class="sd">    release_date_for_display*: str</span>
+<span class="sd">        formated released date &quot;(MMM DD, YYYY)&quot;.</span>
+<span class="sd">    remix_of* : list of :class:`~genius.classes.song.Song`</span>
+<span class="sd">        list of songs remixed in th song.</span>
+<span class="sd">    remixed_by* : list of :class:`~genius.classes.song.Song`</span>
+<span class="sd">        list of songs that remixed the song.</span>
+<span class="sd">    samples* : list of :class:`~genius.classes.song.Song`</span>
+<span class="sd">        list of songs sampled in the song.</span>
+<span class="sd">    sampled_in* : list of :class:`~genius.classes.song.Song`</span>
+<span class="sd">        list of songs that sampled the song.</span>
+<span class="sd">    live_version_of* : list of :class:`~genius.classes.song.Song`</span>
+<span class="sd">        list of songs that are a studio version of the song.</span>
+<span class="sd">    performed_live_as* : list of :class:`~genius.classes.song.Song`</span>
+<span class="sd">        list of songs that a live performance of the song.</span>
+<span class="sd">    song_art_image_url: str</span>
+<span class="sd">        url of the songs&#39;s art image.</span>
+<span class="sd">    title: str</span>
+<span class="sd">        title of the song.</span>
+<span class="sd">    title_with_featured: str</span>
+<span class="sd">        title of the song including featured artists.</span>
+<span class="sd">    url: str</span>
+<span class="sd">        url of the song in genius.</span>
+<span class="sd">    writers*: list of :class:`~genius.classes.artist.Artist`</span>
+<span class="sd">        writers of the song.</span>
+<span class="sd">    note:</span>
+<span class="sd">        **the attributes marked with a * will trigger one extra call to the api.**</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">genius</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">genius</span><span class="p">)</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stats&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">api_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;api_path&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">full_title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;full_title&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">artist</span><span class="p">:</span> <span class="s1">&#39;Artist&#39;</span> <span class="o">=</span> <span class="n">Artist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">genius</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;primary_artist&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hot</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hot&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pageviews</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pageviews&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">song_art_image_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;song_art_image_url&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">title_with_featured</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;title_with_featured&quot;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">primary_artist</span><span class="p">:</span> <span class="s1">&#39;Artist&#39;</span> <span class="o">=</span> <span class="n">Artist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">genius</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;primary_artist&quot;</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">:</span> <span class="n">Stats</span> <span class="o">=</span> <span class="n">Stats</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">genius</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;stats&quot;</span><span class="p">])</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">annotation_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;annotation_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">header_image_thumbnail_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;header_image_thumbnail_url&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">header_image_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;header_image_url&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lyrics_owner_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lyrics_owner_id&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lyrics_state</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lyrics_state&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pyongs_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pyongs_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">song_art_image_thumbnail_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;song_art_image_thumbnail_url&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">song_art_image_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;song_art_image_url&quot;</span><span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">__init_extra_data__</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init_extra_data__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__apple_music_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;apple_music_id&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__apple_music_player_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;apple_music_player_url&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;plain&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__embed_content</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;embed_content&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__featured_video</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;featured_video&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__lyrics_marked_complete_by</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lyrics_marked_complete_by&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__lyrics_placeholder_reason</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lyrics_placeholder_reason&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__recording_location</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;recording_location&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__release_date_for_display</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;release_date_for_display&quot;</span><span class="p">)</span>
-
-        <span class="n">release_date</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;release_date&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">release_date</span><span class="p">:</span>
-            <span class="n">release_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">release_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">__release_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="n">release_date</span>
-
         <span class="n">album</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;album&quot;</span><span class="p">)</span>
-
         <span class="k">if</span> <span class="n">album</span><span class="p">:</span>
             <span class="n">album</span> <span class="o">=</span> <span class="n">Album</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">genius</span><span class="p">,</span> <span class="n">album</span><span class="p">)</span>
 
+        <span class="n">release_date</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;release_date&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">release_date</span><span class="p">:</span>
+            <span class="n">release_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">release_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">__album</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Album</span><span class="p">]</span> <span class="o">=</span> <span class="n">album</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__apple_music_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;apple_music_id&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;plain&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__recording_location</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;recording_location&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__release_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="n">release_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__release_date_for_display</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;release_date_for_display&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__media</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Media</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span>
             <span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">],</span> <span class="n">Media</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">genius</span><span class="p">,</span> <span class="n">m</span><span class="p">)),</span>
             <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;media&quot;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="p">))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__featured_artists</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span>
             <span class="k">lambda</span> <span class="n">fa</span><span class="p">:</span> <span class="n">Artist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">genius</span><span class="p">,</span> <span class="n">fa</span><span class="p">),</span>
             <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;featured_artists&quot;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__producer_artists</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__producers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span>
             <span class="k">lambda</span> <span class="n">pa</span><span class="p">:</span> <span class="n">Artist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">genius</span><span class="p">,</span> <span class="n">pa</span><span class="p">),</span>
             <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;producer_artists&quot;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__writer_artists</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__writers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span>
             <span class="k">lambda</span> <span class="n">wa</span><span class="p">:</span> <span class="n">Artist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">genius</span><span class="p">,</span> <span class="n">wa</span><span class="p">),</span>
             <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;writer_artists&quot;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="p">))</span>
@@ -271,28 +318,8 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__apple_music_id</span>
 
     <span class="nd">@lazy_property</span>
-    <span class="k">def</span> <span class="nf">apple_music_player_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__apple_music_player_url</span>
-
-    <span class="nd">@lazy_property</span>
     <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__description</span>
-
-    <span class="nd">@lazy_property</span>
-    <span class="k">def</span> <span class="nf">embed_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__embed_content</span>
-
-    <span class="nd">@lazy_property</span>
-    <span class="k">def</span> <span class="nf">featured_video</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__featured_video</span>
-
-    <span class="nd">@lazy_property</span>
-    <span class="k">def</span> <span class="nf">lyrics_marked_complete_by</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__lyrics_marked_complete_by</span>
-
-    <span class="nd">@lazy_property</span>
-    <span class="k">def</span> <span class="nf">lyrics_placeholder_reason</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__lyrics_placeholder_reason</span>
 
     <span class="nd">@lazy_property</span>
     <span class="k">def</span> <span class="nf">recording_location</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -315,16 +342,16 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__media</span>
 
     <span class="nd">@lazy_property</span>
-    <span class="k">def</span> <span class="nf">featured_artists</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__featured_artists</span>
+    <span class="k">def</span> <span class="nf">features</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__features</span>
 
     <span class="nd">@lazy_property</span>
-    <span class="k">def</span> <span class="nf">producer_artists</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__producer_artists</span>
+    <span class="k">def</span> <span class="nf">producers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__producers</span>
 
     <span class="nd">@lazy_property</span>
-    <span class="k">def</span> <span class="nf">writer_artists</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__writer_artists</span>
+    <span class="k">def</span> <span class="nf">writers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Artist&#39;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__writers</span>
 
     <span class="nd">@lazy_property</span>
     <span class="k">def</span> <span class="nf">samples</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Song&#39;</span><span class="p">]:</span>
@@ -380,6 +407,14 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">lyrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetch the lyrics of the song using a scrapper.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of str</span>
+<span class="sd">            Lines of the lyrics.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">get_lyrics</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>

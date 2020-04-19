@@ -6,7 +6,6 @@ from .album import Album
 from .artist import Artist
 from .commons import Base
 from .media import Media
-from .stats import Stats
 
 
 def lazy_property(prop):
@@ -23,70 +22,119 @@ def lazy_property(prop):
 
 
 class Song(Base):
+    """
+    Attributes
+    ----------
+    id: int
+        id of the song.
+    album*: :class:`~genius.classes.album.Album`
+        album of the song.
+    apple_music_id*: str
+        id of the song in apple music.
+    artist: :class:`~genius.classes.artist.Artist`
+        primary artist of the song.
+    cover_of* : list of :class:`~genius.classes.song.Song`
+        list of songs covered by the song.
+    covered_by* : list of :class:`~genius.classes.song.Song`
+        list of songs that cover the song.
+    description*: str
+        information about the song.
+    features*: list of :class:`~genius.classes.artist.Artist`
+        featured artists of the song.
+    hot: bool
+        flag to indicate if the song is populare in genius.
+    interpolates* : list of :class:`~genius.classes.song.Song`
+        list of songs interpolated by the song.
+    interpolated_by* : list of :class:`~genius.classes.song.Song`
+        list of songs that interpole the song.
+    is_cover*: bool
+        flag to indicate if the song is a cover.
+    is_live*: bool
+        flag to indicate if the song is a live performance.
+    is_remix*: bool
+        flag to indicate if the song is a remix.
+    media*: dict of str::class:`~genius.classes.media.Media`
+        collection of multimedia related to the song.
+    pageviews: int
+        amount of page views of the song in genius.
+    producers*: list of :class:`~genius.classes.artist.Artist`
+        producers of the song.
+    recording_location*: str
+        location where the song was recorded.
+    release_date*: datetime
+        released date of the song.
+    release_date_for_display*: str
+        formated released date "(MMM DD, YYYY)".
+    remix_of* : list of :class:`~genius.classes.song.Song`
+        list of songs remixed in th song.
+    remixed_by* : list of :class:`~genius.classes.song.Song`
+        list of songs that remixed the song.
+    samples* : list of :class:`~genius.classes.song.Song`
+        list of songs sampled in the song.
+    sampled_in* : list of :class:`~genius.classes.song.Song`
+        list of songs that sampled the song.
+    live_version_of* : list of :class:`~genius.classes.song.Song`
+        list of songs that are a studio version of the song.
+    performed_live_as* : list of :class:`~genius.classes.song.Song`
+        list of songs that a live performance of the song.
+    song_art_image_url: str
+        url of the songs's art image.
+    title: str
+        title of the song.
+    title_with_featured: str
+        title of the song including featured artists.
+    url: str
+        url of the song in genius.
+    writers*: list of :class:`~genius.classes.artist.Artist`
+        writers of the song.
+    note:
+        **the attributes marked with a * will trigger one extra call to the api.**
+    """
     def __init__(self, genius, data):
         super().__init__(genius)
+        stats = data.get("stats", {})
 
         self.id: int = data["id"]
-        self.api_path: str = data["api_path"]
-        self.full_title: str = data["full_title"]
-        self.path: str = data["path"]
+        self.artist: 'Artist' = Artist(self.genius, data["primary_artist"])
+        self.hot: bool = stats.get("hot", False)
+        self.pageviews: int = stats.get("pageviews", 0)
+        self.song_art_image_url: str = data.get("song_art_image_url")
         self.title: str = data["title"]
         self.title_with_featured: str = data["title_with_featured"]
         self.url: str = data["url"]
 
-        self.primary_artist: 'Artist' = Artist(self.genius, data["primary_artist"])
-        self.stats: Stats = Stats(self.genius, data["stats"])
-
-        self.annotation_count: int = data.get("annotation_count", 0)
-        self.header_image_thumbnail_url: str = data.get("header_image_thumbnail_url")
-        self.header_image_url: str = data.get("header_image_url")
-        self.lyrics_owner_id: int = data.get("lyrics_owner_id", 0)
-        self.lyrics_state: str = data.get("lyrics_state")
-        self.pyongs_count: int = data.get("pyongs_count", 0)
-        self.song_art_image_thumbnail_url: str = data.get("song_art_image_thumbnail_url")
-        self.song_art_image_url: str = data.get("song_art_image_url")
-
         self.__init_extra_data__(data)
 
     def __init_extra_data__(self, data):
-        self.__apple_music_id: str = data.get("apple_music_id")
-        self.__apple_music_player_url: str = data.get("apple_music_player_url")
-        self.__description: str = data.get("description", {}).get("plain")
-        self.__embed_content: str = data.get("embed_content")
-        self.__featured_video: bool = data.get("featured_video", False)
-        self.__lyrics_marked_complete_by: str = data.get("lyrics_marked_complete_by")
-        self.__lyrics_placeholder_reason: str = data.get("lyrics_placeholder_reason")
-        self.__recording_location: str = data.get("recording_location")
-        self.__release_date_for_display: str = data.get("release_date_for_display")
-
-        release_date = data.get("release_date")
-
-        if release_date:
-            release_date = datetime.strptime(release_date, "%Y-%m-%d")
-
-        self.__release_date: Optional[datetime] = release_date
-
         album = data.get("album")
-
         if album:
             album = Album(self.genius, album)
 
+        release_date = data.get("release_date")
+        if release_date:
+            release_date = datetime.strptime(release_date, "%Y-%m-%d")
+
         self.__album: Optional[Album] = album
+        self.__apple_music_id: str = data.get("apple_music_id")
+        self.__description: str = data.get("description", {}).get("plain")
+        self.__recording_location: str = data.get("recording_location")
+        self.__release_date: Optional[datetime] = release_date
+        self.__release_date_for_display: str = data.get("release_date_for_display")
 
         self.__media: Dict[str, Media] = dict(map(
             lambda m: (m["provider"], Media(self.genius, m)),
             data.get("media", [])
         ))
 
-        self.__featured_artists: List['Artist'] = list(map(
+        self.__features: List['Artist'] = list(map(
             lambda fa: Artist(self.genius, fa),
             data.get("featured_artists", [])
         ))
-        self.__producer_artists: List['Artist'] = list(map(
+        self.__producers: List['Artist'] = list(map(
             lambda pa: Artist(self.genius, pa),
             data.get("producer_artists", [])
         ))
-        self.__writer_artists: List['Artist'] = list(map(
+        self.__writers: List['Artist'] = list(map(
             lambda wa: Artist(self.genius, wa),
             data.get("writer_artists", [])
         ))
@@ -124,28 +172,8 @@ class Song(Base):
         return self.__apple_music_id
 
     @lazy_property
-    def apple_music_player_url(self) -> str:
-        return self.__apple_music_player_url
-
-    @lazy_property
     def description(self) -> str:
         return self.__description
-
-    @lazy_property
-    def embed_content(self) -> str:
-        return self.__embed_content
-
-    @lazy_property
-    def featured_video(self) -> bool:
-        return self.__featured_video
-
-    @lazy_property
-    def lyrics_marked_complete_by(self) -> str:
-        return self.__lyrics_marked_complete_by
-
-    @lazy_property
-    def lyrics_placeholder_reason(self) -> str:
-        return self.__lyrics_placeholder_reason
 
     @lazy_property
     def recording_location(self) -> str:
@@ -168,16 +196,16 @@ class Song(Base):
         return self.__media
 
     @lazy_property
-    def featured_artists(self) -> List['Artist']:
-        return self.__featured_artists
+    def features(self) -> List['Artist']:
+        return self.__features
 
     @lazy_property
-    def producer_artists(self) -> List['Artist']:
-        return self.__producer_artists
+    def producers(self) -> List['Artist']:
+        return self.__producers
 
     @lazy_property
-    def writer_artists(self) -> List['Artist']:
-        return self.__writer_artists
+    def writers(self) -> List['Artist']:
+        return self.__writers
 
     @lazy_property
     def samples(self) -> List['Song']:
@@ -233,6 +261,14 @@ class Song(Base):
 
     @property
     def lyrics(self) -> List[str]:
+        """
+        Fetch the lyrics of the song using a scrapper.
+
+        Returns
+        -------
+        list of str
+            Lines of the lyrics.
+        """
         return get_lyrics(self.url)
 
     def __repr__(self):  # pragma: no cover

@@ -1,70 +1,33 @@
-genius.classes package
+Code > Classes
 ======================
 
-Submodules
-----------
 
-genius.classes.album module
+Album
 ---------------------------
 
 .. automodule:: genius.classes.album
     :members:
-    :undoc-members:
-    :show-inheritance:
 
-genius.classes.artist module
+Artist
 ----------------------------
 
 .. automodule:: genius.classes.artist
     :members:
-    :undoc-members:
-    :show-inheritance:
 
-genius.classes.commons module
------------------------------
-
-.. automodule:: genius.classes.commons
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-genius.classes.media module
+Media
 ---------------------------
 
 .. automodule:: genius.classes.media
     :members:
-    :undoc-members:
-    :show-inheritance:
 
-genius.classes.social\_media module
+SocialMedia
 -----------------------------------
 
 .. automodule:: genius.classes.social_media
     :members:
-    :undoc-members:
-    :show-inheritance:
 
-genius.classes.song module
+Song
 --------------------------
 
 .. automodule:: genius.classes.song
     :members:
-    :undoc-members:
-    :show-inheritance:
-
-genius.classes.stats module
----------------------------
-
-.. automodule:: genius.classes.stats
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: genius.classes
-    :members:
-    :undoc-members:
-    :show-inheritance:

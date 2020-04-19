@@ -110,9 +110,33 @@ class Genius:
         self.api = API(access_token, verbose)
 
     def get_song(self, song_id: int) -> Song:
+        """
+        Retrieve the information of a song.
+
+        Parameters
+        ----------
+        song_id: int
+            ID of the song.
+
+        Returns
+        -------
+        :class:`~genius.classes.song.Song`
+        """
         return Song(self, self.api.get_song(song_id))
 
     def get_artist(self, artist_id: int) -> Artist:
+        """
+        Retrieve the information of an artist.
+
+        Parameters
+        ----------
+        artist_id: int
+            ID of the artist.
+
+        Returns
+        -------
+        :class:`~genius.classes.artist.Artist`
+        """
         return Artist(self, self.api.get_artist(artist_id))
 
     def get_artist_songs(
@@ -122,6 +146,26 @@ class Genius:
         per_page: int = 50,
         sort: str = SortingKeys.TITLE
     ) -> List[Song]:
+        """
+        Retrieve the songs of an artist.
+
+        Parameters
+        ----------
+        artist_id: int
+            ID of the artist.
+        page: int
+            Desired page.
+        per_page: int
+            Amount of songs per page.
+        sort: string
+            Sort key for the songs (title/popularity).
+
+        Returns
+        -------
+        list of :class:`~genius.classes.song.Song`:
+            Songs of the artist.
+        """
+
         return list(map(
             lambda song: Song(self, song),
             self.api.get_artist_songs(artist_id, page, per_page, sort)
@@ -132,6 +176,21 @@ class Genius:
         artist_id: int,
         sort: str = "title"
     ) -> List[Song]:
+        """
+        Retrieve the all the songs of an artist.
+
+        Parameters
+        ----------
+        artist_id: int
+            ID of the artist.
+        sort: string
+            Sort key for the songs (title/popularity).
+
+        Yields
+        -------
+        :class:`~genius.classes.song.Song`:
+            Song of the artist.
+        """
         page = 0
 
         while True:
@@ -149,6 +208,24 @@ class Genius:
         page: int = 1,
         per_page: int = 20
     ) -> List[Song]:
+        """
+        Search for songs that match with the provided text.
+
+        Parameters
+        ----------
+        text: str
+            Text to search.
+        page: int
+            Desired page.
+        per_page: int
+            Amount of songs per page.
+
+        Returns
+        -------
+        list of :class:`~genius.classes.song.Song`:
+            Songs that match the search text.
+        """
+
         result = self.api.search(text=text, page=page, per_page=per_page)
         return list(map(lambda song: Song(self, song), result))
 
@@ -157,6 +234,22 @@ class Genius:
         text: str,
         page_limit: int = 10
     ) -> Iterator[Song]:
+        """
+        Search for all the songs that match with the provided text.
+
+        Parameters
+        ----------
+        text: str
+            Text to search.
+        page_limit: int
+            Limit of pages in the search.
+
+        Yields
+        -------
+        :class:`~genius.classes.song.Song`:
+            Song that matches the search text.
+        """
+
         page = 0
 
         while True:
@@ -173,36 +266,25 @@ class Genius:
             yield from songs
 
     def search_artist(self, name: str) -> Optional[Artist]:
+        """
+        Search for an artist that match with the provided text.
+
+        Parameters
+        ----------
+        name: str
+            Name of the artist to search.
+
+        Returns
+        -------
+        :class:`~genius.classes.artist.Artist`:
+            Artist that matches the search.
+        """
         name = name.lower()
 
         for song in self.search_all(name):
-            artist = song.primary_artist
+            artist = song.artist
 
             if name == artist.name.lower():
                 return artist
 
         return None
-
-    def search_songs(
-        self,
-        title: str,
-        exact: bool = False,
-        page_limit: int = 10
-    ) -> Iterator[Song]:
-        title = title.lower()
-
-        for song in self.search_all(title, page_limit=page_limit):
-            if not exact:
-                if title in song.title.lower():
-                    yield song
-            else:
-                titles = {
-                    song.title.lower(),
-                    song.title_with_featured.lower(),
-                    song.full_title.lower(),
-                }
-
-                if title in titles:
-                    yield song
-
-

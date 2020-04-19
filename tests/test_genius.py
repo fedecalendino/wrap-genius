@@ -48,24 +48,24 @@ class GeniusTest(TestCase):
     def test_get_song(self, song_id, song_title, artist_name):
         song = self.genius.get_song(song_id)
         self.assertEqual(song.title, song_title)
-        self.assertEqual(song.primary_artist.name, artist_name)
+        self.assertEqual(song.artist.name, artist_name)
 
     @ddt.data(
-        (3027437, "Saturnz Barz", "Gorillaz", True),
-        (3027418, "Ascension", "Gorillaz", False),
-        (53533, "On Melancholy Hill", "Gorillaz", True),
-        (3027414, "Andromeda", "Gorillaz", False),
-        (151355, "Instant Crush", "Daft Punk", True),
-        (151349, "Giorgio by Moroder", "Daft Punk", False),
-        (151385, "Fragments of Time", "Daft Punk", True),
-        (72011, "Digital Love", "Daft Punk", False),
+        (3027437, "Saturnz Barz", "Gorillaz"),
+        (3027418, "Ascension", "Gorillaz"),
+        (53533, "On Melancholy Hill", "Gorillaz"),
+        (3027414, "Andromeda", "Gorillaz"),
+        (151355, "Instant Crush", "Daft Punk"),
+        (151349, "Giorgio by Moroder", "Daft Punk"),
+        (151385, "Fragments of Time", "Daft Punk"),
+        (72011, "Digital Love", "Daft Punk"),
     )
     @ddt.unpack
-    def test_search_songs(self, song_id, song_title, artist_name, exact):
-        song = next(self.genius.search_songs(song_title, exact=exact))
+    def test_search_songs(self, song_id, song_title, artist_name):
+        song = next(self.genius.search_all(song_title))
 
         self.assertEqual(song.id, song_id)
-        self.assertEqual(song.primary_artist.name, artist_name)
+        self.assertEqual(song.artist.name, artist_name)
 
     def test_api_exception(self):
         with self.assertRaises(APIException):

@@ -1,9 +1,12 @@
-wrap-genius
-=======================================
+.. include:: ../README.rst
+
+
+Sections
+--------
 
 .. toctree::
-	:maxdepth: 3
+    :maxdepth: 3
 
-	source/modules
-	source/genius
-	source/genius.classes
+    source/genius
+    source/genius.classes
+

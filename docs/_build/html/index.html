@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="genius" href="source/modules.html" /> 
+    <link rel="next" title="Code &gt; Main" href="source/genius.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,9 +80,8 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="source/modules.html">genius</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/genius.html">genius package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/genius.classes.html">genius.classes package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/genius.html">Code &gt; Main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/genius.classes.html">Code &gt; Classes</a></li>
 </ul>
 
             
@@ -149,45 +148,109 @@
             
   <div class="section" id="wrap-genius">
 <h1>wrap-genius<a class="headerlink" href="#wrap-genius" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="python-wrapper-for-genius-com-s-api">
+<h2>Python wrapper for genius.com’s API<a class="headerlink" href="#python-wrapper-for-genius-com-s-api" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://pypi.org/project/wrap-genius"><img alt="https://img.shields.io/pypi/v/wrap-genius?logo=pypi" src="https://img.shields.io/pypi/v/wrap-genius?logo=pypi" /></a>
+<a class="reference external image-reference" href="https://wrap-genius.readthedocs.io/en/latest/"><img alt="https://img.shields.io/readthedocs/wrap-genius?logo=read%20the%20docs" src="https://img.shields.io/readthedocs/wrap-genius?logo=read%20the%20docs" /></a>
+<a class="reference external image-reference" href="https://travis-ci.com/federicocalendino/wrap-genius"><img alt="https://img.shields.io/travis/federicocalendino/wrap-genius/master?logo=travis" src="https://img.shields.io/travis/federicocalendino/wrap-genius/master?logo=travis" /></a>
+<a class="reference external image-reference" href="https://sonarcloud.io/dashboard?id=federicocalendino_wrap-genius"><img alt="https://img.shields.io/sonar/alert_status/federicocalendino_wrap-genius?logo=sonarcloud&amp;server=https://sonarcloud.io" src="https://img.shields.io/sonar/alert_status/federicocalendino_wrap-genius?logo=sonarcloud&amp;server=https://sonarcloud.io" /></a>
+<a class="reference external image-reference" href="https://codecov.io/gh/federicocalendino/wrap-genius"><img alt="https://img.shields.io/codecov/c/gh/federicocalendino/wrap-genius?logo=codecov" src="https://img.shields.io/codecov/c/gh/federicocalendino/wrap-genius?logo=codecov" /></a>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p><strong>wrap-genius</strong> is supported on Python 3.6+ and it can be installed using <a class="reference external" href="https://pypi.python.org/pypi/pip">pip</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install wrap-genius
+</pre></div>
+</div>
+<p>To be able to use it, you’ll need to create an API client for <a class="reference external" href="https://genius.com/api-clients">genius.com</a> and get a <strong>CLIENT ACCESS TOKEN</strong>.</p>
+</div>
+<div class="section" id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
+<p>Assuming you already have you access token, get an instance of the genius wrapper as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">genius</span> <span class="kn">import</span> <span class="n">Genius</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Genius</span><span class="p">(</span><span class="n">access_token</span><span class="o">=</span><span class="s2">&quot;YOUR-TOKEN&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With this instance you can interact with genius in many ways:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Search for an artist by name</span>
+<span class="n">artist</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">search_artist</span><span class="p">(</span><span class="s2">&quot;Gorillaz&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">artist</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;Gorillaz (860)&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the artist&#39;s social media accounts</span>
+<span class="n">instagram</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">social_media</span><span class="p">[</span><span class="s2">&quot;instagram&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">instagram</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">instagram</span><span class="o">.</span><span class="n">followers</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;gorillaz 2277483&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the artist&#39;s song by popularity</span>
+<span class="k">for</span> <span class="n">song</span> <span class="ow">in</span> <span class="n">artist</span><span class="o">.</span><span class="n">songs_by_popularity</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">song</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;Feel Good Inc. (21569)&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;Clint Eastwood (1698)&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;Saturnz Barz (3027437)&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;Ascension (3027418)&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;On Melancholy Hill (53533)&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="o">...</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the details of a song by its id</span>
+<span class="n">song</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">get_song</span><span class="p">(</span><span class="n">song_id</span><span class="o">=</span><span class="mi">3027414</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">song</span><span class="o">.</span><span class="n">title_with_featured</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">song</span><span class="o">.</span><span class="n">release_date_for_display</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;Andromeda (Ft. DRAM)&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;March 23, 2017&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the song album, or the featured artists</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">song</span><span class="o">.</span><span class="n">album</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">featured</span> <span class="ow">in</span> <span class="n">song</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">featured</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;Humanz (335930)&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;DRAM (241761)&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># And even, a song&#39;s lyrics</span>
+<span class="n">lyrics</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">lyrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lyrics</span><span class="p">))</span>
+
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;[Verse 1: 2-D]&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;When the pulsing looks to die for&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;Take it in your heart now, lover&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;When the case is out&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;And tired and sodden&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;Take it in your heart&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="s2">&quot;Take it in your heart&quot;</span>
+<span class="o">&gt;&gt;</span> <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sections">
+<h2>Sections<a class="headerlink" href="#sections" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="source/modules.html">genius</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.html">genius package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="source/genius.html#subpackages">Subpackages</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/genius.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/genius.html#module-genius.api">genius.api module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/genius.html#module-genius.exceptions">genius.exceptions module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/genius.html#module-genius.scrapper">genius.scrapper module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/genius.html#module-genius">Module contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/genius.html">Code &gt; Main</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="source/genius.html#module-genius.api">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/genius.html#module-genius.exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/genius.html#module-genius.scrapper">Scrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="source/genius.classes.html">Code &gt; Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#module-genius.classes.album">Album</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#module-genius.classes.artist">Artist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#module-genius.classes.media">Media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#module-genius.classes.social_media">SocialMedia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#module-genius.classes.song">Song</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/genius.html">genius package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="source/genius.classes.html">genius.classes package</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.html#module-genius.api">genius.api module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.html#module-genius.exceptions">genius.exceptions module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.html#module-genius.scrapper">genius.scrapper module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.html#module-genius">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/genius.classes.html">genius.classes package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#module-genius.classes.album">genius.classes.album module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#module-genius.classes.artist">genius.classes.artist module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#module-genius.classes.commons">genius.classes.commons module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#module-genius.classes.media">genius.classes.media module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#module-genius.classes.social_media">genius.classes.social_media module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#module-genius.classes.song">genius.classes.song module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#module-genius.classes.stats">genius.classes.stats module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/genius.classes.html#module-genius.classes">Module contents</a></li>
-</ul>
-</li>
-</ul>
+</div>
 </div>
 </div>
 
@@ -199,7 +262,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="source/modules.html" class="btn btn-neutral float-right" title="genius" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="source/genius.html" class="btn btn-neutral float-right" title="Code &gt; Main" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>

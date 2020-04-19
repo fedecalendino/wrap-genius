@@ -16,6 +16,20 @@ def _get_soup(url: str, lower=False) -> BeautifulSoup:
 
 
 def get_lyrics(url: str, attemps_left=3) -> List[str]:
+    """
+    Looks for the lyrics of a song in genius.
+
+    Parameters
+    ----------
+    url: str
+        Url of the song in genius.
+
+    Returns
+    -------
+    list of str:
+        Lines of the lyrics.
+
+    """
     if not attemps_left:
         return []
 
@@ -29,6 +43,22 @@ def get_lyrics(url: str, attemps_left=3) -> List[str]:
 
 
 def get_followers(url: str, handle: str) -> int:
+    """
+    Looks for the amount of followers in a given social medial.
+
+    Parameters
+    ----------
+    url: str
+        Url of the profile.
+    handle: str
+        Username of the account.
+
+    Returns
+    -------
+    int
+        Amount of followers.
+
+    """
     url = url.replace("facebook.com", "business.facebook.com")
     handle = handle.lower()
     soup = _get_soup(url, lower=True)

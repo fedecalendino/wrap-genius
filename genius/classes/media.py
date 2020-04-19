@@ -2,12 +2,21 @@ from .commons import Base
 
 
 class Media(Base):
+    """
+    Attributes
+    ----------
+    provider: str
+        provider of the media (youtube, spotify, etc.)
+    type: str
+        media type (audio/video).
+    url: str
+        url of the media.
+    """
+
     def __init__(self, genius, data):
         super().__init__(genius)
 
-        self.native_uri: str = data.get("native_uri")
         self.provider: str = data.get("provider")
-        self.start: int = data.get("start", 0)
         self.type: str = data.get("type")
         self.url: str = data.get("url")
 

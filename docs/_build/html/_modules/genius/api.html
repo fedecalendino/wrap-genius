@@ -79,9 +79,8 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../source/modules.html">genius</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../source/genius.html">genius package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../source/genius.classes.html">genius.classes package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/genius.html">Code &gt; Main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/genius.classes.html">Code &gt; Classes</a></li>
 </ul>
 
             
@@ -158,14 +157,14 @@
 <div class="viewcode-block" id="SortingKeys"><a class="viewcode-back" href="../../source/genius.html#genius.api.SortingKeys">[docs]</a><span class="k">class</span> <span class="nc">SortingKeys</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Valid sorting keys.&quot;&quot;&quot;</span>
 
-    <span class="n">TITLE</span> <span class="o">=</span> <span class="s2">&quot;title&quot;</span>
     <span class="n">POPULARITY</span> <span class="o">=</span> <span class="s2">&quot;popularity&quot;</span>
+    <span class="n">TITLE</span> <span class="o">=</span> <span class="s2">&quot;title&quot;</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span></div>
 
 
-<div class="viewcode-block" id="API"><a class="viewcode-back" href="../../source/genius.html#genius.api.API">[docs]</a><span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
     <span class="n">BASE_URL</span> <span class="o">=</span> <span class="s2">&quot;https://api.genius.com&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
@@ -205,17 +204,17 @@
 
         <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;response&quot;</span><span class="p">]</span>
 
-<div class="viewcode-block" id="API.get_song"><a class="viewcode-back" href="../../source/genius.html#genius.api.API.get_song">[docs]</a>    <span class="k">def</span> <span class="nf">get_song</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">song_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">get_song</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">song_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
         <span class="k">assert</span> <span class="n">song_id</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;songs/</span><span class="si">{</span><span class="n">song_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;song&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;songs/</span><span class="si">{</span><span class="n">song_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;song&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="API.get_artist"><a class="viewcode-back" href="../../source/genius.html#genius.api.API.get_artist">[docs]</a>    <span class="k">def</span> <span class="nf">get_artist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artist_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">get_artist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artist_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
         <span class="k">assert</span> <span class="n">artist_id</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;artists/</span><span class="si">{</span><span class="n">artist_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;artist&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;artists/</span><span class="si">{</span><span class="n">artist_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;artist&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="API.get_artist_songs"><a class="viewcode-back" href="../../source/genius.html#genius.api.API.get_artist_songs">[docs]</a>    <span class="k">def</span> <span class="nf">get_artist_songs</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">get_artist_songs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">artist_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -232,9 +231,9 @@
             <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span>
             <span class="n">per_page</span><span class="o">=</span><span class="n">per_page</span><span class="p">,</span>
             <span class="n">sort</span><span class="o">=</span><span class="n">sort</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;songs&quot;</span><span class="p">,</span> <span class="p">[])</span></div>
+        <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;songs&quot;</span><span class="p">,</span> <span class="p">[])</span>
 
-<div class="viewcode-block" id="API.search"><a class="viewcode-back" href="../../source/genius.html#genius.api.API.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -249,36 +248,95 @@
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span>
             <span class="k">lambda</span> <span class="n">hit</span><span class="p">:</span> <span class="n">hit</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">],</span>
             <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hits&quot;</span><span class="p">,</span> <span class="p">[])</span>
-        <span class="p">))</span></div></div>
+        <span class="p">))</span>
 
 
-<div class="viewcode-block" id="Genius"><a class="viewcode-back" href="../../source/genius.html#genius.api.Genius">[docs]</a><span class="k">class</span> <span class="nc">Genius</span><span class="p">:</span>
+<span class="k">class</span> <span class="nc">Genius</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">API</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Genius.get_song"><a class="viewcode-back" href="../../source/genius.html#genius.api.Genius.get_song">[docs]</a>    <span class="k">def</span> <span class="nf">get_song</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">song_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Song</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Song</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">get_song</span><span class="p">(</span><span class="n">song_id</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">get_song</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">song_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Song</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the information of a song.</span>
 
-<div class="viewcode-block" id="Genius.get_artist"><a class="viewcode-back" href="../../source/genius.html#genius.api.Genius.get_artist">[docs]</a>    <span class="k">def</span> <span class="nf">get_artist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artist_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Artist</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Artist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">get_artist</span><span class="p">(</span><span class="n">artist_id</span><span class="p">))</span></div>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        song_id: int</span>
+<span class="sd">            ID of the song.</span>
 
-<div class="viewcode-block" id="Genius.get_artist_songs"><a class="viewcode-back" href="../../source/genius.html#genius.api.Genius.get_artist_songs">[docs]</a>    <span class="k">def</span> <span class="nf">get_artist_songs</span><span class="p">(</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`~genius.classes.song.Song`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Song</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">get_song</span><span class="p">(</span><span class="n">song_id</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">get_artist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artist_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Artist</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the information of an artist.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        artist_id: int</span>
+<span class="sd">            ID of the artist.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`~genius.classes.artist.Artist`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Artist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">get_artist</span><span class="p">(</span><span class="n">artist_id</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">get_artist_songs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">artist_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
         <span class="n">per_page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
         <span class="n">sort</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">SortingKeys</span><span class="o">.</span><span class="n">TITLE</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Song</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the songs of an artist.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        artist_id: int</span>
+<span class="sd">            ID of the artist.</span>
+<span class="sd">        page: int</span>
+<span class="sd">            Desired page.</span>
+<span class="sd">        per_page: int</span>
+<span class="sd">            Amount of songs per page.</span>
+<span class="sd">        sort: string</span>
+<span class="sd">            Sort key for the songs (title/popularity).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of :class:`~genius.classes.song.Song`:</span>
+<span class="sd">            Songs of the artist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span>
             <span class="k">lambda</span> <span class="n">song</span><span class="p">:</span> <span class="n">Song</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">song</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">get_artist_songs</span><span class="p">(</span><span class="n">artist_id</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">per_page</span><span class="p">,</span> <span class="n">sort</span><span class="p">)</span>
-        <span class="p">))</span></div>
+        <span class="p">))</span>
 
-<div class="viewcode-block" id="Genius.get_all_artist_songs"><a class="viewcode-back" href="../../source/genius.html#genius.api.Genius.get_all_artist_songs">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_artist_songs</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">get_all_artist_songs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">artist_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">sort</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;title&quot;</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Song</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the all the songs of an artist.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        artist_id: int</span>
+<span class="sd">            ID of the artist.</span>
+<span class="sd">        sort: string</span>
+<span class="sd">            Sort key for the songs (title/popularity).</span>
+
+<span class="sd">        Yields</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`~genius.classes.song.Song`:</span>
+<span class="sd">            Song of the artist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">page</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -288,22 +346,56 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">songs</span><span class="p">:</span>
                 <span class="k">break</span>
 
-            <span class="k">yield from</span> <span class="n">songs</span></div>
+            <span class="k">yield from</span> <span class="n">songs</span>
 
-<div class="viewcode-block" id="Genius.search"><a class="viewcode-back" href="../../source/genius.html#genius.api.Genius.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
         <span class="n">per_page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Song</span><span class="p">]:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="n">per_page</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">song</span><span class="p">:</span> <span class="n">Song</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">song</span><span class="p">),</span> <span class="n">result</span><span class="p">))</span></div>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Search for songs that match with the provided text.</span>
 
-<div class="viewcode-block" id="Genius.search_all"><a class="viewcode-back" href="../../source/genius.html#genius.api.Genius.search_all">[docs]</a>    <span class="k">def</span> <span class="nf">search_all</span><span class="p">(</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        text: str</span>
+<span class="sd">            Text to search.</span>
+<span class="sd">        page: int</span>
+<span class="sd">            Desired page.</span>
+<span class="sd">        per_page: int</span>
+<span class="sd">            Amount of songs per page.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of :class:`~genius.classes.song.Song`:</span>
+<span class="sd">            Songs that match the search text.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="n">per_page</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">song</span><span class="p">:</span> <span class="n">Song</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">song</span><span class="p">),</span> <span class="n">result</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">search_all</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">page_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Song</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Search for all the songs that match with the provided text.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        text: str</span>
+<span class="sd">            Text to search.</span>
+<span class="sd">        page_limit: int</span>
+<span class="sd">            Limit of pages in the search.</span>
+
+<span class="sd">        Yields</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`~genius.classes.song.Song`:</span>
+<span class="sd">            Song that matches the search text.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">page</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -317,42 +409,31 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">songs</span><span class="p">:</span>
                 <span class="k">break</span>
 
-            <span class="k">yield from</span> <span class="n">songs</span></div>
+            <span class="k">yield from</span> <span class="n">songs</span>
 
-<div class="viewcode-block" id="Genius.search_artist"><a class="viewcode-back" href="../../source/genius.html#genius.api.Genius.search_artist">[docs]</a>    <span class="k">def</span> <span class="nf">search_artist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Artist</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">search_artist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Artist</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Search for an artist that match with the provided text.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name: str</span>
+<span class="sd">            Name of the artist to search.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`~genius.classes.artist.Artist`:</span>
+<span class="sd">            Artist that matches the search.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">song</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_all</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-            <span class="n">artist</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">primary_artist</span>
+            <span class="n">artist</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">artist</span>
 
             <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">artist</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
                 <span class="k">return</span> <span class="n">artist</span>
 
-        <span class="k">return</span> <span class="kc">None</span></div>
-
-<div class="viewcode-block" id="Genius.search_songs"><a class="viewcode-back" href="../../source/genius.html#genius.api.Genius.search_songs">[docs]</a>    <span class="k">def</span> <span class="nf">search_songs</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">exact</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">page_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Song</span><span class="p">]:</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-
-        <span class="k">for</span> <span class="n">song</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_all</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">page_limit</span><span class="o">=</span><span class="n">page_limit</span><span class="p">):</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">exact</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">song</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-                    <span class="k">yield</span> <span class="n">song</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">titles</span> <span class="o">=</span> <span class="p">{</span>
-                    <span class="n">song</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
-                    <span class="n">song</span><span class="o">.</span><span class="n">title_with_featured</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
-                    <span class="n">song</span><span class="o">.</span><span class="n">full_title</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
-                <span class="p">}</span>
-
-                <span class="k">if</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">titles</span><span class="p">:</span>
-                    <span class="k">yield</span> <span class="n">song</span></div></div>
-
-
+        <span class="k">return</span> <span class="kc">None</span>
 </pre></div>
 
            </div>
