@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>genius.classes package &mdash; wrap-genius  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="genius package" href="genius.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> wrap-genius
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">genius</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="genius.html">genius package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="genius.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">genius.classes package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="genius.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="genius.html#module-genius.api">genius.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="genius.html#module-genius.exceptions">genius.exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="genius.html#module-genius.scrapper">genius.scrapper module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="genius.html#module-genius">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="genius.html">genius package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="genius.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">genius.classes package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-genius.classes.album">genius.classes.album module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-genius.classes.artist">genius.classes.artist module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-genius.classes.commons">genius.classes.commons module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-genius.classes.media">genius.classes.media module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-genius.classes.social_media">genius.classes.social_media module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-genius.classes.song">genius.classes.song module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-genius.classes.stats">genius.classes.stats module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-genius.classes">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="genius.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="genius.html#module-genius.api">genius.api module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="genius.html#module-genius.exceptions">genius.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="genius.html#module-genius.scrapper">genius.scrapper module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="genius.html#module-genius">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">genius.classes package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-genius.classes.album">genius.classes.album module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-genius.classes.artist">genius.classes.artist module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-genius.classes.commons">genius.classes.commons module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-genius.classes.media">genius.classes.media module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-genius.classes.social_media">genius.classes.social_media module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-genius.classes.song">genius.classes.song module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-genius.classes.stats">genius.classes.stats module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-genius.classes">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">wrap-genius</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">genius</a> &raquo;</li>
+        
+          <li><a href="genius.html">genius package</a> &raquo;</li>
+        
+      <li>genius.classes package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/genius.classes.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="genius-classes-package">
+<h1>genius.classes package<a class="headerlink" href="#genius-classes-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-genius.classes.album">
+<span id="genius-classes-album-module"></span><h2>genius.classes.album module<a class="headerlink" href="#module-genius.classes.album" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="genius.classes.album.Album">
+<em class="property">class </em><code class="descclassname">genius.classes.album.</code><code class="descname">Album</code><span class="sig-paren">(</span><em>genius</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/genius/classes/album.html#Album"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genius.classes.album.Album" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genius.classes.commons.Base" title="genius.classes.commons.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">genius.classes.commons.Base</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-genius.classes.artist">
+<span id="genius-classes-artist-module"></span><h2>genius.classes.artist module<a class="headerlink" href="#module-genius.classes.artist" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="genius.classes.artist.Artist">
+<em class="property">class </em><code class="descclassname">genius.classes.artist.</code><code class="descname">Artist</code><span class="sig-paren">(</span><em>genius</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/genius/classes/artist.html#Artist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genius.classes.artist.Artist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genius.classes.commons.Base" title="genius.classes.commons.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">genius.classes.commons.Base</span></code></a></p>
+<dl class="attribute">
+<dt id="genius.classes.artist.Artist.alternate_names">
+<code class="descname">alternate_names</code><a class="headerlink" href="#genius.classes.artist.Artist.alternate_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.artist.Artist.description">
+<code class="descname">description</code><a class="headerlink" href="#genius.classes.artist.Artist.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.artist.Artist.followers_count">
+<code class="descname">followers_count</code><a class="headerlink" href="#genius.classes.artist.Artist.followers_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.artist.Artist.social_media">
+<code class="descname">social_media</code><a class="headerlink" href="#genius.classes.artist.Artist.social_media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.artist.Artist.songs">
+<code class="descname">songs</code><a class="headerlink" href="#genius.classes.artist.Artist.songs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.artist.Artist.songs_by_popularity">
+<code class="descname">songs_by_popularity</code><a class="headerlink" href="#genius.classes.artist.Artist.songs_by_popularity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="genius.classes.artist.lazy_property">
+<code class="descclassname">genius.classes.artist.</code><code class="descname">lazy_property</code><span class="sig-paren">(</span><em>prop</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/genius/classes/artist.html#lazy_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genius.classes.artist.lazy_property" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-genius.classes.commons">
+<span id="genius-classes-commons-module"></span><h2>genius.classes.commons module<a class="headerlink" href="#module-genius.classes.commons" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="genius.classes.commons.Base">
+<em class="property">class </em><code class="descclassname">genius.classes.commons.</code><code class="descname">Base</code><span class="sig-paren">(</span><em>genius</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/genius/classes/commons.html#Base"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genius.classes.commons.Base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-genius.classes.media">
+<span id="genius-classes-media-module"></span><h2>genius.classes.media module<a class="headerlink" href="#module-genius.classes.media" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="genius.classes.media.Media">
+<em class="property">class </em><code class="descclassname">genius.classes.media.</code><code class="descname">Media</code><span class="sig-paren">(</span><em>genius</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/genius/classes/media.html#Media"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genius.classes.media.Media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genius.classes.commons.Base" title="genius.classes.commons.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">genius.classes.commons.Base</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-genius.classes.social_media">
+<span id="genius-classes-social-media-module"></span><h2>genius.classes.social_media module<a class="headerlink" href="#module-genius.classes.social_media" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="genius.classes.social_media.SocialMedia">
+<em class="property">class </em><code class="descclassname">genius.classes.social_media.</code><code class="descname">SocialMedia</code><span class="sig-paren">(</span><em>network</em>, <em>handle</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/genius/classes/social_media.html#SocialMedia"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genius.classes.social_media.SocialMedia" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="genius.classes.social_media.SocialMedia.followers">
+<code class="descname">followers</code><a class="headerlink" href="#genius.classes.social_media.SocialMedia.followers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.social_media.SocialMedia.url">
+<code class="descname">url</code><a class="headerlink" href="#genius.classes.social_media.SocialMedia.url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="genius.classes.social_media.lazy_property">
+<code class="descclassname">genius.classes.social_media.</code><code class="descname">lazy_property</code><span class="sig-paren">(</span><em>prop</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/genius/classes/social_media.html#lazy_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genius.classes.social_media.lazy_property" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-genius.classes.song">
+<span id="genius-classes-song-module"></span><h2>genius.classes.song module<a class="headerlink" href="#module-genius.classes.song" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="genius.classes.song.Song">
+<em class="property">class </em><code class="descclassname">genius.classes.song.</code><code class="descname">Song</code><span class="sig-paren">(</span><em>genius</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/genius/classes/song.html#Song"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genius.classes.song.Song" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genius.classes.commons.Base" title="genius.classes.commons.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">genius.classes.commons.Base</span></code></a></p>
+<dl class="attribute">
+<dt id="genius.classes.song.Song.album">
+<code class="descname">album</code><a class="headerlink" href="#genius.classes.song.Song.album" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.apple_music_id">
+<code class="descname">apple_music_id</code><a class="headerlink" href="#genius.classes.song.Song.apple_music_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.apple_music_player_url">
+<code class="descname">apple_music_player_url</code><a class="headerlink" href="#genius.classes.song.Song.apple_music_player_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.cover_of">
+<code class="descname">cover_of</code><a class="headerlink" href="#genius.classes.song.Song.cover_of" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.covered_by">
+<code class="descname">covered_by</code><a class="headerlink" href="#genius.classes.song.Song.covered_by" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.description">
+<code class="descname">description</code><a class="headerlink" href="#genius.classes.song.Song.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.embed_content">
+<code class="descname">embed_content</code><a class="headerlink" href="#genius.classes.song.Song.embed_content" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.featured_artists">
+<code class="descname">featured_artists</code><a class="headerlink" href="#genius.classes.song.Song.featured_artists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.featured_video">
+<code class="descname">featured_video</code><a class="headerlink" href="#genius.classes.song.Song.featured_video" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.interpolated_by">
+<code class="descname">interpolated_by</code><a class="headerlink" href="#genius.classes.song.Song.interpolated_by" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.interpolates">
+<code class="descname">interpolates</code><a class="headerlink" href="#genius.classes.song.Song.interpolates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.is_cover">
+<code class="descname">is_cover</code><a class="headerlink" href="#genius.classes.song.Song.is_cover" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.is_live">
+<code class="descname">is_live</code><a class="headerlink" href="#genius.classes.song.Song.is_live" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.is_remix">
+<code class="descname">is_remix</code><a class="headerlink" href="#genius.classes.song.Song.is_remix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.live_version_of">
+<code class="descname">live_version_of</code><a class="headerlink" href="#genius.classes.song.Song.live_version_of" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.lyrics">
+<code class="descname">lyrics</code><a class="headerlink" href="#genius.classes.song.Song.lyrics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.lyrics_marked_complete_by">
+<code class="descname">lyrics_marked_complete_by</code><a class="headerlink" href="#genius.classes.song.Song.lyrics_marked_complete_by" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.lyrics_placeholder_reason">
+<code class="descname">lyrics_placeholder_reason</code><a class="headerlink" href="#genius.classes.song.Song.lyrics_placeholder_reason" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.media">
+<code class="descname">media</code><a class="headerlink" href="#genius.classes.song.Song.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.performed_live_as">
+<code class="descname">performed_live_as</code><a class="headerlink" href="#genius.classes.song.Song.performed_live_as" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.producer_artists">
+<code class="descname">producer_artists</code><a class="headerlink" href="#genius.classes.song.Song.producer_artists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.recording_location">
+<code class="descname">recording_location</code><a class="headerlink" href="#genius.classes.song.Song.recording_location" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.release_date">
+<code class="descname">release_date</code><a class="headerlink" href="#genius.classes.song.Song.release_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.release_date_for_display">
+<code class="descname">release_date_for_display</code><a class="headerlink" href="#genius.classes.song.Song.release_date_for_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.remix_of">
+<code class="descname">remix_of</code><a class="headerlink" href="#genius.classes.song.Song.remix_of" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.remixed_by">
+<code class="descname">remixed_by</code><a class="headerlink" href="#genius.classes.song.Song.remixed_by" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.sampled_in">
+<code class="descname">sampled_in</code><a class="headerlink" href="#genius.classes.song.Song.sampled_in" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.samples">
+<code class="descname">samples</code><a class="headerlink" href="#genius.classes.song.Song.samples" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="genius.classes.song.Song.writer_artists">
+<code class="descname">writer_artists</code><a class="headerlink" href="#genius.classes.song.Song.writer_artists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="genius.classes.song.lazy_property">
+<code class="descclassname">genius.classes.song.</code><code class="descname">lazy_property</code><span class="sig-paren">(</span><em>prop</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/genius/classes/song.html#lazy_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genius.classes.song.lazy_property" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-genius.classes.stats">
+<span id="genius-classes-stats-module"></span><h2>genius.classes.stats module<a class="headerlink" href="#module-genius.classes.stats" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="genius.classes.stats.Stats">
+<em class="property">class </em><code class="descclassname">genius.classes.stats.</code><code class="descname">Stats</code><span class="sig-paren">(</span><em>genius</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/genius/classes/stats.html#Stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genius.classes.stats.Stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genius.classes.commons.Base" title="genius.classes.commons.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">genius.classes.commons.Base</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-genius.classes">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-genius.classes" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="genius.html" class="btn btn-neutral float-left" title="genius package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Federico Calendino
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

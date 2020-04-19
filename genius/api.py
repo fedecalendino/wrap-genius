@@ -9,8 +9,10 @@ from genius.exceptions import APIException
 
 
 class SortingKeys(str, Enum):
-    TITLE = "title"
+    """Valid sorting keys."""
+
     POPULARITY = "popularity"
+    TITLE = "title"
 
     def __str__(self):  # pragma: no cover
         return self.value
