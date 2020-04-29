@@ -10,14 +10,14 @@ Python wrapper for genius.com's API
 .. image:: https://img.shields.io/readthedocs/wrap-genius?logo=read%20the%20docs
     :target: https://wrap-genius.readthedocs.io/en/latest/
 
-.. image:: https://img.shields.io/travis/federicocalendino/wrap-genius/master?logo=travis
-    :target: https://travis-ci.com/federicocalendino/wrap-genius
+.. image:: https://img.shields.io/travis/fedecalendino/wrap-genius/master?logo=travis
+    :target: https://travis-ci.com/fedecalendino/wrap-genius
 
-.. image:: https://img.shields.io/sonar/alert_status/federicocalendino_wrap-genius?logo=sonarcloud&server=https://sonarcloud.io
-    :target: https://sonarcloud.io/dashboard?id=federicocalendino_wrap-genius
+.. image:: https://img.shields.io/sonar/alert_status/fedecalendino_wrap-genius?logo=sonarcloud&server=https://sonarcloud.io
+    :target: https://sonarcloud.io/dashboard?id=fedecalendino_wrap-genius
 
-.. image:: https://img.shields.io/codecov/c/gh/federicocalendino/wrap-genius?logo=codecov
-    :target: https://codecov.io/gh/federicocalendino/wrap-genius
+.. image:: https://img.shields.io/codecov/c/gh/fedecalendino/wrap-genius?logo=codecov
+    :target: https://codecov.io/gh/fedecalendino/wrap-genius
 
 
 Installation
