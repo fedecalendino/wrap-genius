@@ -9,14 +9,14 @@ with open(path.join(this_directory, "README.rst"), encoding="utf-8") as f:
 
 setup(
     name="wrap-genius",
-    version="1.1",
+    version="1.2",
     url="https://github.com/fedecalendino/wrap-genius",
     license="MIT",
     description="python wrapper for api.genius.com",
     long_description=long_description,
     long_description_content_type="text/x-rst",
-    author="Federico Calendino",
-    author_email="federico@calendino.com",
+    author="Fede Calendino",
+    author_email="fede@calendino.com",
     packages=["genius", "genius.classes"],
     install_requires=["unidecode"],
     keywords=[
