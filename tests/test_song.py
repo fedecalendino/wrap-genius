@@ -19,7 +19,7 @@ class SongTest(TestCase):
         self.assertEqual(song.artist.name, "Gorillaz")
         self.assertFalse(song._fully_loaded_)
 
-        self.assertEqual(song.album.name, "Humanz")
+        self.assertEqual(song.album.name, "Humanz (Deluxe)")
         self.assertEqual(song.album.artist.name, "Gorillaz")
 
         self.assertEqual(song.release_date_for_display, "March 23, 2017")
@@ -27,15 +27,15 @@ class SongTest(TestCase):
 
         featured = song.features[0]
         self.assertEqual(featured.id, 241761)
-        self.assertEqual(featured.name, "DRAM")
+        self.assertEqual(featured.name, "Shelley FKA DRAM")
 
-        writer = song.writers[0]
-        self.assertEqual(writer.id, 241761)
-        self.assertEqual(writer.name, "DRAM")
+        writers = {writer.id: writer.name for writer in song.writers}
 
-        writer = song.writers[1]
-        self.assertEqual(writer.id, 1974)
-        self.assertEqual(writer.name, "Damon Albarn")
+        self.assertIn(1974, writers)
+        self.assertEqual(writers[1974], "Damon Albarn")
+
+        self.assertIn(241761, writers)
+        self.assertEqual(writers[241761], "Shelley FKA DRAM")
 
         media = song.media
         self.assertIn("9W44NWYwa1g", media["youtube"].url)

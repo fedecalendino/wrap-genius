@@ -23,15 +23,12 @@ class ArtistTest(TestCase):
 
         facebook = social_media["facebook"]
         self.assertEqual(facebook.handle, "foofighters")
-        self.assertTrue(facebook.followers > 11_500_000)
 
         instagram = social_media["instagram"]
         self.assertEqual(instagram.handle, "foofighters")
-        self.assertTrue(instagram.followers > 3_700_000)
 
         twitter = social_media["twitter"]
         self.assertEqual(twitter.handle, "foofighters")
-        self.assertTrue(twitter.followers > 3_000_000)
 
         for index, song in enumerate(artist.songs):
             self.assertEqual(song.artist.id, artist.id)
