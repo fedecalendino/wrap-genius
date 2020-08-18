@@ -38,6 +38,7 @@ class SongTest(TestCase):
         self.assertEqual(writers[241761], "Shelley FKA DRAM")
 
         media = song.media
+        self.assertIn("1217912232", media["apple-music"].url)
         self.assertIn("9W44NWYwa1g", media["youtube"].url)
 
     def test_lyrics(self):

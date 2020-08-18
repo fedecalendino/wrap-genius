@@ -115,7 +115,6 @@ class Song(Base):
             release_date = datetime.strptime(release_date, "%Y-%m-%d")
 
         self.__album: Optional[Album] = album
-        self.__apple_music_id: str = data.get("apple_music_id")
         self.__description: str = data.get("description", {}).get("plain")
         self.__recording_location: str = data.get("recording_location")
         self.__release_date: Optional[datetime] = release_date
@@ -125,6 +124,17 @@ class Song(Base):
             lambda m: (m["provider"], Media(self.genius, m)),
             data.get("media", [])
         ))
+
+        apple_music_id = data.get("apple_music_id")
+        if apple_music_id:
+            self.__media["apple-music"] = Media(
+                genius=self.genius,
+                data={
+                    "provider": "apple music",
+                    "type": "audio",
+                    "url": f"https://music.apple.com/station/ra.{apple_music_id}",
+                }
+            )
 
         self.__features: List['Artist'] = list(map(
             lambda fa: Artist(self.genius, fa),
@@ -166,10 +176,6 @@ class Song(Base):
                 self.__live_version_of: List['Song'] = songs
             elif type_ == "performed_live_as":
                 self.__performed_live_as: List['Song'] = songs
-
-    @lazy_property
-    def apple_music_id(self) -> str:
-        return self.__apple_music_id
 
     @lazy_property
     def description(self) -> str:
