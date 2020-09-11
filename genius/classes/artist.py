@@ -22,7 +22,7 @@ class Artist(Base):
     ----------
     id: int
         id of the artist.
-    alternate_names*: list of str
+    alternate_names*: List[str]
         list of the artist's alternative names.
     description*: str
         information about the artist.
@@ -36,7 +36,7 @@ class Artist(Base):
         flag to indicate if the artist was verified.
     name: str
         name of the artist.
-    social_media*: dict of str::class:`~genius.classes.social_media.SocialMedia`
+    social_media*: Dict[str, genius.classes.social_media.SocialMedia]
         social media accounts of the artist.
     url: str
         url of the artist in genius.
@@ -90,7 +90,7 @@ class Artist(Base):
 
         Yields
         -------
-        :class:`~genius.classes.song.Song`
+        genius.classes.song.Song
             Song of the artist.
         """
         yield from self.genius.get_all_artist_songs(self.id)
@@ -102,7 +102,7 @@ class Artist(Base):
 
         Yields
         -------
-        :class:`~genius.classes.song.Song`
+        genius.classes.song.Song
             Song of the artist.
         """
         yield from self.genius.get_all_artist_songs(self.id, sort="popularity")

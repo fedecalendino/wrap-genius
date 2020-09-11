@@ -27,25 +27,25 @@ class Song(Base):
     ----------
     id: int
         id of the song.
-    album*: :class:`~genius.classes.album.Album`
+    album*: genius.classes.album.Album
         album of the song.
     apple_music_id*: str
         id of the song in apple music.
-    artist: :class:`~genius.classes.artist.Artist`
+    artist: genius.classes.artist.Artist
         primary artist of the song.
-    cover_of* : list of :class:`~genius.classes.song.Song`
+    cover_of* : List[genius.classes.song.Song]
         list of songs covered by the song.
-    covered_by* : list of :class:`~genius.classes.song.Song`
+    covered_by* : List[genius.classes.song.Song]
         list of songs that cover the song.
     description*: str
         information about the song.
-    features*: list of :class:`~genius.classes.artist.Artist`
+    features*: List[genius.classes.artist.Artist]
         featured artists of the song.
     hot: bool
         flag to indicate if the song is populare in genius.
-    interpolates* : list of :class:`~genius.classes.song.Song`
+    interpolates* : List[genius.classes.song.Song]
         list of songs interpolated by the song.
-    interpolated_by* : list of :class:`~genius.classes.song.Song`
+    interpolated_by* : List[genius.classes.song.Song]
         list of songs that interpole the song.
     is_cover*: bool
         flag to indicate if the song is a cover.
@@ -53,11 +53,11 @@ class Song(Base):
         flag to indicate if the song is a live performance.
     is_remix*: bool
         flag to indicate if the song is a remix.
-    media*: dict of str::class:`~genius.classes.media.Media`
+    media*: Dict[str, genius.classes.media.Media]
         collection of multimedia related to the song.
     pageviews: int
         amount of page views of the song in genius.
-    producers*: list of :class:`~genius.classes.artist.Artist`
+    producers*: List[genius.classes.artist.Artist]
         producers of the song.
     recording_location*: str
         location where the song was recorded.
@@ -65,17 +65,17 @@ class Song(Base):
         released date of the song.
     release_date_for_display*: str
         formated released date "(MMM DD, YYYY)".
-    remix_of* : list of :class:`~genius.classes.song.Song`
+    remix_of* : List[genius.classes.song.Song]
         list of songs remixed in th song.
-    remixed_by* : list of :class:`~genius.classes.song.Song`
+    remixed_by* : List[genius.classes.song.Song]
         list of songs that remixed the song.
-    samples* : list of :class:`~genius.classes.song.Song`
+    samples* : List[genius.classes.song.Song]
         list of songs sampled in the song.
-    sampled_in* : list of :class:`~genius.classes.song.Song`
+    sampled_in* : List[genius.classes.song.Song]
         list of songs that sampled the song.
-    live_version_of* : list of :class:`~genius.classes.song.Song`
+    live_version_of* : List[genius.classes.song.Song]
         list of songs that are a studio version of the song.
-    performed_live_as* : list of :class:`~genius.classes.song.Song`
+    performed_live_as* : List[genius.classes.song.Song]
         list of songs that a live performance of the song.
     song_art_image_url: str
         url of the songs's art image.
@@ -85,7 +85,7 @@ class Song(Base):
         title of the song including featured artists.
     url: str
         url of the song in genius.
-    writers*: list of :class:`~genius.classes.artist.Artist`
+    writers*: List[genius.classes.artist.Artist]
         writers of the song.
     note:
         **the attributes marked with a * will trigger one extra call to the api.**
@@ -272,7 +272,7 @@ class Song(Base):
 
         Returns
         -------
-        list of str
+        List[str]
             Lines of the lyrics.
         """
         return get_lyrics(self.url)

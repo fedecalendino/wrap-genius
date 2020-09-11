@@ -135,7 +135,7 @@ class Genius:
 
         Returns
         -------
-        :class:`~genius.classes.artist.Artist`
+        genius.classes.artist.Artist
         """
         return Artist(self, self.api.get_artist(artist_id))
 
@@ -162,7 +162,7 @@ class Genius:
 
         Returns
         -------
-        list of :class:`~genius.classes.song.Song`:
+        List[genius.classes.song.Song]
             Songs of the artist.
         """
 
@@ -188,7 +188,7 @@ class Genius:
 
         Yields
         -------
-        :class:`~genius.classes.song.Song`:
+        genius.classes.song.Song
             Song of the artist.
         """
         page = 0
@@ -222,7 +222,7 @@ class Genius:
 
         Returns
         -------
-        list of :class:`~genius.classes.song.Song`:
+        List[genius.classes.song.Song]
             Songs that match the search text.
         """
 
@@ -246,7 +246,7 @@ class Genius:
 
         Yields
         -------
-        :class:`~genius.classes.song.Song`:
+        genius.classes.song.Song
             Song that matches the search text.
         """
 
@@ -276,7 +276,7 @@ class Genius:
 
         Returns
         -------
-        :class:`~genius.classes.artist.Artist`:
+        genius.classes.artist.Artist
             Artist that matches the search.
         """
         name = name.lower()

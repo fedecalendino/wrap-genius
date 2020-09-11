@@ -26,7 +26,7 @@ def get_lyrics(url: str, attemps_left=3) -> List[str]:
 
     Returns
     -------
-    list of str:
+    List[str]:
         Lines of the lyrics.
 
     """

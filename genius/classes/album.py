@@ -8,7 +8,7 @@ class Album(Base):
     ----------
     id: int
         id of the album.
-    artist: :class:`~genius.classes.artist.Artist`
+    artist: genius.classes.artist.Artist
         artist of the album.
     cover_art_url: str
         url of the album's cover image.
