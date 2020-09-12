@@ -1,5 +1,5 @@
-from .commons import Base
 from .artist import Artist
+from .commons import Base
 
 
 class Album(Base):

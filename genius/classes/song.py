@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import Dict, List, Optional
 
 from genius.scrapper import get_lyrics
+
 from .album import Album
 from .artist import Artist
 from .commons import Base

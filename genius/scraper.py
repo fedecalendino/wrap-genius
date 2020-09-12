@@ -1,5 +1,3 @@
-import json
-import re
 from typing import List
 
 import requests
