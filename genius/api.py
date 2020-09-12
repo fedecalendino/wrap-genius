@@ -92,17 +92,17 @@ class API:
         text: str,
         page: int = 1,
         per_page: int = 20
-    ) -> List[Dict]:
+    ) -> Iterator[Dict]:
         assert text
         assert page > 0
         assert 21 > per_page > 1
 
         result = self("search", q=text, page=page, per_page=per_page)
 
-        return list(map(
+        return map(
             lambda hit: hit["result"],
             result.get("hits", [])
-        ))
+        )
 
 
 class Genius:
@@ -120,7 +120,7 @@ class Genius:
 
         Returns
         -------
-        :class:`~genius.classes.song.Song`
+        genius.classes.song.Song
         """
         return Song(self, self.api.get_song(song_id))
 
@@ -145,7 +145,7 @@ class Genius:
         page: int = 1,
         per_page: int = 50,
         sort: str = SortingKeys.TITLE
-    ) -> List[Song]:
+    ) -> Iterator[Song]:
         """
         Retrieve the songs of an artist.
 
@@ -162,20 +162,20 @@ class Genius:
 
         Returns
         -------
-        List[genius.classes.song.Song]
+        Iterator[genius.classes.song.Song]
             Songs of the artist.
         """
 
-        return list(map(
+        return map(
             lambda song: Song(self, song),
             self.api.get_artist_songs(artist_id, page, per_page, sort)
-        ))
+        )
 
     def get_all_artist_songs(
         self,
         artist_id: int,
         sort: str = "title"
-    ) -> List[Song]:
+    ) -> Iterator[Song]:
         """
         Retrieve the all the songs of an artist.
 
@@ -207,7 +207,7 @@ class Genius:
         text: str,
         page: int = 1,
         per_page: int = 20
-    ) -> List[Song]:
+    ) -> Iterator[Song]:
         """
         Search for songs that match with the provided text.
 
@@ -222,12 +222,12 @@ class Genius:
 
         Returns
         -------
-        List[genius.classes.song.Song]
+        Iterator[genius.classes.song.Song]
             Songs that match the search text.
         """
 
         result = self.api.search(text=text, page=page, per_page=per_page)
-        return list(map(lambda song: Song(self, song), result))
+        return map(lambda song: Song(self, song), result)
 
     def search_all(
         self,
