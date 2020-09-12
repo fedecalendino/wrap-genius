@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Dict, List, Optional
 
-from genius.scrapper import get_lyrics
+from genius.scraper import get_lyrics
 
 from .album import Album
 from .artist import Artist
@@ -269,7 +269,7 @@ class Song(Base):
     @property
     def lyrics(self) -> List[str]:
         """
-        Fetch the lyrics of the song using a scrapper.
+        Fetch the lyrics of the song using a scraper.
 
         Returns
         -------
