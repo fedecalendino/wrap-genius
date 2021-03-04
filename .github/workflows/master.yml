@@ -34,11 +34,12 @@ jobs:
           GENIUS_ACCESS_TOKEN: ${{ secrets.TOKEN_GENIUS }}
         run: |
           coverage run --source genius -m unittest discover
-          coverage xml
+          coverage xml -o ./coverage.xml
 
-      - name: Override Coverage Source Path for Sonar
-        run: sed -i "s/<source>\/home\/runner\/work\/repo<\/source>/<source>\/github\/workspace<\/source>/g" /home/runner/work/repo/path/to/coverage.xml
-
+      - name: Fix Code Coverage Paths
+        run: |
+          sed -i "s@${GITHUB_WORKSPACE}@/github/workspace/@g" ./coverage.xml
+        
       - name: SonarCloud Scan
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
