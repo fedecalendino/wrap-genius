@@ -36,6 +36,9 @@ jobs:
           coverage run --source genius -m unittest discover
           coverage xml
 
+      - name: Override Coverage Source Path for Sonar
+        run: sed -i "s/<source>\/home\/runner\/work\/repo<\/source>/<source>\/github\/workspace<\/source>/g" /home/runner/work/repo/path/to/coverage.xml
+
       - name: SonarCloud Scan
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
