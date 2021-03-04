@@ -29,14 +29,15 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
 
-#    - name: Publish
-#      env:
-#        TWINE_USERNAME: __token__
-#        TWINE_PASSWORD: ${{ secrets.TOKEN_PYPI }}
-#      run: |
-#        twine upload dist/*
+    - name: Publish
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.TOKEN_PYPI }}
+      run: |
+        twine upload dist/*
 
     - name: Notify
       with:
         slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        pypi_project_name: wrap-genius
       uses: fedecalendino/slack-release-notifier@main
