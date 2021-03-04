@@ -2,7 +2,7 @@
 
 [![Version](https://img.shields.io/pypi/v/wrap-genius?logo=pypi)](https://pypi.org/project/wrap-genius)
 [![Quality Gate Status](https://img.shields.io/sonar/alert_status/fedecalendino_wrap-genius?logo=sonarcloud&server=https://sonarcloud.io)](https://sonarcloud.io/dashboard?id=fedecalendino_wrap-genius)
-[![CodeCoverage](https://img.shields.io/codecov/c/gh/fedecalendino/wrap-genius?logo=codecov)](https://codecov.io/gh/fedecalendino/wrap-genius)
+[![CodeCoverage](https://img.shields.io/sonar/coverage/fedecalendino_wrap-genius?logo=sonarcloud&server=https://sonarcloud.io)](https://sonarcloud.io/dashboard?id=fedecalendino_wrap-genius)
 
 Python wrapper for genius.com's API
 

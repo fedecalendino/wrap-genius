@@ -10,7 +10,7 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="wrap-genius",
-    version="1.5",
+    version="1.5.1",
     url="https://github.com/fedecalendino/wrap-genius",
     license="MIT",
     description="Python wrapper for api.genius.com",
