@@ -40,4 +40,4 @@ jobs:
       with:
         slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
         pypi_project_name: wrap-genius
-      uses: fedecalendino/slack-release-notifier@main
+      uses: fedecalendino/slack-release-notifier@v1.1.0
