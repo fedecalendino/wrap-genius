@@ -4,16 +4,16 @@ from setuptools import setup
 
 this_directory = path.abspath(path.dirname(__file__))
 
-with open(path.join(this_directory, "readme.md"), encoding="utf-8") as f:
+with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 
 setup(
     name="wrap-genius",
-    version="1.3",
+    version="1.4",
     url="https://github.com/fedecalendino/wrap-genius",
     license="MIT",
-    description="python wrapper for api.genius.com",
+    description="Python wrapper for api.genius.com",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Fede Calendino",
