@@ -19,7 +19,11 @@ setup(
     author="Fede Calendino",
     author_email="fede@calendino.com",
     packages=["genius", "genius.classes"],
-    install_requires=["unidecode"],
+    install_requires=[
+        "beautifulsoup4",
+        "requests", 
+        "unidecode",
+    ],
     keywords=[
         "python",
         "api",
