@@ -1,4 +1,5 @@
 from enum import Enum
+from functools import lru_cache
 from time import time
 from typing import Any, Dict, Iterator, List, Optional
 
@@ -27,20 +28,15 @@ class API:
         self.access_token = f"Bearer {access_token}"
         self.verbose = verbose
 
-    def __call__(
-        self,
-        service: str,
-        **params
-    ) -> Dict[str, Any]:
+    @lru_cache
+    def __call__(self, service: str, **params) -> Dict[str, Any]:
         start = time()
         url = f"{self.BASE_URL}/{service}"
 
         params["text_format"] = "plain"
 
         response = requests.get(
-            url=url,
-            params=params,
-            headers={"Authorization": self.access_token}
+            url=url, params=params, headers={"Authorization": self.access_token}
         ).json()
 
         if self.verbose:  # pragma: no cover
@@ -50,11 +46,7 @@ class API:
         meta = response["meta"]
 
         if meta["status"] != 200:
-            raise APIException(
-                status=meta["status"],
-                message=meta["message"],
-                url=url
-            )
+            raise APIException(status=meta["status"], message=meta["message"], url=url)
 
         return response["response"]
 
@@ -73,7 +65,7 @@ class API:
         artist_id: int,
         page: int = 1,
         per_page: int = 50,
-        sort: str = SortingKeys.TITLE
+        sort: str = SortingKeys.TITLE,
     ) -> List[Dict]:
         assert artist_id
         assert page > 0
@@ -84,25 +76,17 @@ class API:
             service=f"artists/{artist_id}/songs",
             page=page,
             per_page=per_page,
-            sort=sort
+            sort=sort,
         ).get("songs", [])
 
-    def search(
-        self,
-        text: str,
-        page: int = 1,
-        per_page: int = 20
-    ) -> Iterator[Dict]:
+    def search(self, text: str, page: int = 1, per_page: int = 20) -> Iterator[Dict]:
         assert text
         assert page > 0
         assert 21 > per_page > 1
 
         result = self("search", q=text, page=page, per_page=per_page)
 
-        return map(
-            lambda hit: hit["result"],
-            result.get("hits", [])
-        )
+        return map(lambda hit: hit["result"], result.get("hits", []))
 
 
 class Genius:
@@ -144,7 +128,7 @@ class Genius:
         artist_id: int,
         page: int = 1,
         per_page: int = 50,
-        sort: str = SortingKeys.TITLE
+        sort: str = SortingKeys.TITLE,
     ) -> Iterator[Song]:
         """
         Retrieve the songs of an artist.
@@ -168,13 +152,11 @@ class Genius:
 
         return map(
             lambda song: Song(self, song),
-            self.api.get_artist_songs(artist_id, page, per_page, sort)
+            self.api.get_artist_songs(artist_id, page, per_page, sort),
         )
 
     def get_all_artist_songs(
-        self,
-        artist_id: int,
-        sort: str = "title"
+        self, artist_id: int, sort: str = "title"
     ) -> Iterator[Song]:
         """
         Retrieve the all the songs of an artist.
@@ -202,12 +184,7 @@ class Genius:
 
             yield from songs
 
-    def search(
-        self,
-        text: str,
-        page: int = 1,
-        per_page: int = 20
-    ) -> Iterator[Song]:
+    def search(self, text: str, page: int = 1, per_page: int = 20) -> Iterator[Song]:
         """
         Search for songs that match with the provided text.
 
@@ -229,11 +206,7 @@ class Genius:
         result = self.api.search(text=text, page=page, per_page=per_page)
         return map(lambda song: Song(self, song), result)
 
-    def search_all(
-        self,
-        text: str,
-        page_limit: int = 10
-    ) -> Iterator[Song]:
+    def search_all(self, text: str, page_limit: int = 10) -> Iterator[Song]:
         """
         Search for all the songs that match with the provided text.
 

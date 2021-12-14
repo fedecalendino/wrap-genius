@@ -2,7 +2,6 @@ from datetime import datetime
 from typing import Dict, List, Optional
 
 from genius.scraper import get_lyrics
-
 from .album import Album
 from .artist import Artist
 from .commons import Base
@@ -91,12 +90,13 @@ class Song(Base):
     note:
         **the attributes marked with a * will trigger one extra call to the api.**
     """
+
     def __init__(self, genius, data):
         super().__init__(genius)
         stats = data.get("stats", {})
 
         self.id: int = data["id"]
-        self.artist: 'Artist' = Artist(self.genius, data["primary_artist"])
+        self.artist: "Artist" = Artist(self.genius, data["primary_artist"])
         self.hot: bool = stats.get("hot", False)
         self.pageviews: int = stats.get("pageviews", 0)
         self.song_art_image_url: str = data.get("song_art_image_url")
@@ -121,10 +121,9 @@ class Song(Base):
         self.__release_date: Optional[datetime] = release_date
         self.__release_date_for_display: str = data.get("release_date_for_display")
 
-        self.__media: Dict[str, Media] = dict(map(
-            lambda m: (m["provider"], Media(self.genius, m)),
-            data.get("media", [])
-        ))
+        self.__media: Dict[str, Media] = dict(
+            map(lambda m: (m["provider"], Media(self.genius, m)), data.get("media", []))
+        )
 
         apple_music_id = data.get("apple_music_id")
         if apple_music_id:
@@ -134,49 +133,45 @@ class Song(Base):
                     "provider": "apple music",
                     "type": "audio",
                     "url": f"https://music.apple.com/station/ra.{apple_music_id}",
-                }
+                },
             )
 
-        self.__features: List['Artist'] = list(map(
-            lambda fa: Artist(self.genius, fa),
-            data.get("featured_artists", [])
-        ))
-        self.__producers: List['Artist'] = list(map(
-            lambda pa: Artist(self.genius, pa),
-            data.get("producer_artists", [])
-        ))
-        self.__writers: List['Artist'] = list(map(
-            lambda wa: Artist(self.genius, wa),
-            data.get("writer_artists", [])
-        ))
+        self.__features: List["Artist"] = list(
+            map(lambda fa: Artist(self.genius, fa), data.get("featured_artists", []))
+        )
+        self.__producers: List["Artist"] = list(
+            map(lambda pa: Artist(self.genius, pa), data.get("producer_artists", []))
+        )
+        self.__writers: List["Artist"] = list(
+            map(lambda wa: Artist(self.genius, wa), data.get("writer_artists", []))
+        )
 
         for relationship in data.get("song_relationships", []):
             type_ = relationship["type"]
-            songs = list(map(
-                lambda rs: Song(self.genius, rs),
-                relationship.get("songs", [])
-            ))
+            songs = list(
+                map(lambda rs: Song(self.genius, rs), relationship.get("songs", []))
+            )
 
             if type_ == "samples":
-                self.__samples: List['Song'] = songs
+                self.__samples: List["Song"] = songs
             elif type_ == "sampled_in":
-                self.__sampled_in: List['Song'] = songs
+                self.__sampled_in: List["Song"] = songs
             elif type_ == "interpolates":
-                self.__interpolates: List['Song'] = songs
+                self.__interpolates: List["Song"] = songs
             elif type_ == "interpolated_by":
-                self.__interpolated_by: List['Song'] = songs
+                self.__interpolated_by: List["Song"] = songs
             elif type_ == "cover_of":
-                self.__cover_of: List['Song'] = songs
+                self.__cover_of: List["Song"] = songs
             elif type_ == "covered_by":
-                self.__covered_by: List['Song'] = songs
+                self.__covered_by: List["Song"] = songs
             elif type_ == "remix_of":
-                self.__remix_of: List['Song'] = songs
+                self.__remix_of: List["Song"] = songs
             elif type_ == "remixed_by":
-                self.__remixed_by: List['Song'] = songs
+                self.__remixed_by: List["Song"] = songs
             elif type_ == "live_version_of":
-                self.__live_version_of: List['Song'] = songs
+                self.__live_version_of: List["Song"] = songs
             elif type_ == "performed_live_as":
-                self.__performed_live_as: List['Song'] = songs
+                self.__performed_live_as: List["Song"] = songs
 
     @lazy_property
     def description(self) -> str:
@@ -195,7 +190,7 @@ class Song(Base):
         return self.__release_date_for_display
 
     @lazy_property
-    def album(self) -> 'Album':
+    def album(self) -> "Album":
         return self.__album
 
     @lazy_property
@@ -203,55 +198,55 @@ class Song(Base):
         return self.__media
 
     @lazy_property
-    def features(self) -> List['Artist']:
+    def features(self) -> List["Artist"]:
         return self.__features
 
     @lazy_property
-    def producers(self) -> List['Artist']:
+    def producers(self) -> List["Artist"]:
         return self.__producers
 
     @lazy_property
-    def writers(self) -> List['Artist']:
+    def writers(self) -> List["Artist"]:
         return self.__writers
 
     @lazy_property
-    def samples(self) -> List['Song']:
+    def samples(self) -> List["Song"]:
         return self.__samples
 
     @lazy_property
-    def sampled_in(self) -> List['Song']:
+    def sampled_in(self) -> List["Song"]:
         return self.__sampled_in
 
     @lazy_property
-    def interpolates(self) -> List['Song']:
+    def interpolates(self) -> List["Song"]:
         return self.__interpolates
 
     @lazy_property
-    def interpolated_by(self) -> List['Song']:
+    def interpolated_by(self) -> List["Song"]:
         return self.__interpolated_by
 
     @lazy_property
-    def cover_of(self) -> List['Song']:
+    def cover_of(self) -> List["Song"]:
         return self.__cover_of
 
     @lazy_property
-    def covered_by(self) -> List['Song']:
+    def covered_by(self) -> List["Song"]:
         return self.__covered_by
 
     @lazy_property
-    def remix_of(self) -> List['Song']:
+    def remix_of(self) -> List["Song"]:
         return self.__remix_of
 
     @lazy_property
-    def remixed_by(self) -> List['Song']:
+    def remixed_by(self) -> List["Song"]:
         return self.__remixed_by
 
     @lazy_property
-    def live_version_of(self) -> List['Song']:
+    def live_version_of(self) -> List["Song"]:
         return self.__live_version_of
 
     @lazy_property
-    def performed_live_as(self) -> List['Song']:
+    def performed_live_as(self) -> List["Song"]:
         return self.__performed_live_as
 
     @property

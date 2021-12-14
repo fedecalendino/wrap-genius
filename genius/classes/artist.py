@@ -13,6 +13,7 @@ def lazy_property(prop):
             self.__init_extra_data__(data)
             self._fully_loaded_ = True
         return prop(self)
+
     return wrapper
 
 
@@ -65,7 +66,9 @@ class Artist(Base):
         self.__social_media: Dict[str, Optional[SocialMedia]] = {}
         for network in ["facebook", "instagram", "twitter"]:
             handle = data.get(f"{network}_name")
-            self.__social_media[network] = SocialMedia(network, handle) if handle else None
+            self.__social_media[network] = (
+                SocialMedia(network, handle) if handle else None
+            )
 
     @lazy_property
     def alternate_names(self) -> List[str]:
@@ -84,7 +87,7 @@ class Artist(Base):
         return self.__social_media
 
     @property
-    def songs(self) -> Iterator['Song']:
+    def songs(self) -> Iterator["Song"]:
         """
         Fetch all the songs of the artist sorted by **title**.
 
@@ -96,7 +99,7 @@ class Artist(Base):
         yield from self.genius.get_all_artist_songs(self.id)
 
     @property
-    def songs_by_popularity(self) -> Iterator['Song']:
+    def songs_by_popularity(self) -> Iterator["Song"]:
         """
         Fetch all the songs of the artist sorted by **popularity**.
 
