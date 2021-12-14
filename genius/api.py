@@ -195,7 +195,7 @@ class Genius:
 
         while True:
             page += 1
-            songs = self.get_artist_songs(artist_id, page=page, sort=sort)
+            songs = list(self.get_artist_songs(artist_id, page=page, sort=sort))
 
             if not songs:
                 break
@@ -258,7 +258,7 @@ class Genius:
             if page_limit and page > page_limit:
                 break
 
-            songs = self.search(text, page=page)
+            songs = list(self.search(text, page=page))
 
             if not songs:
                 break
