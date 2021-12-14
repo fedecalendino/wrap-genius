@@ -3,12 +3,10 @@ from unittest import TestCase
 
 from genius.api import Genius
 
-
 GENIUS_ACCESS_TOKEN = os.getenv("GENIUS_ACCESS_TOKEN")
 
 
 class SongTest(TestCase):
-
     def setUp(self) -> None:
         self.genius = Genius(GENIUS_ACCESS_TOKEN)
 

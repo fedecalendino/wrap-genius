@@ -1,6 +1,6 @@
 from os import path
-from setuptools import setup
 
+from setuptools import setup
 
 this_directory = path.abspath(path.dirname(__file__))
 
@@ -10,7 +10,7 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="wrap-genius",
-    version="1.6.0",
+    version="1.6.1",
     url="https://github.com/fedecalendino/wrap-genius",
     license="MIT",
     description="Python wrapper for api.genius.com",
@@ -21,7 +21,7 @@ setup(
     packages=["genius", "genius.classes"],
     install_requires=[
         "beautifulsoup4",
-        "requests", 
+        "requests",
         "unidecode",
     ],
     keywords=[
@@ -40,5 +40,7 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
     ],
 )

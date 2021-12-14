@@ -23,7 +23,7 @@ class Album(Base):
 
         self.id: int = data["id"]
 
-        self.artist: 'Artist' = Artist(genius, data["artist"])
+        self.artist: "Artist" = Artist(genius, data["artist"])
         self.cover_art_url: str = data.get("cover_art_url")
         self.name: str = data["name"]
         self.url: str = data["url"]

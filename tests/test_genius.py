@@ -6,13 +6,11 @@ import ddt
 from genius.api import Genius
 from genius.exceptions import APIException
 
-
 GENIUS_ACCESS_TOKEN = os.getenv("GENIUS_ACCESS_TOKEN")
 
 
 @ddt.ddt
 class GeniusTest(TestCase):
-
     def setUp(self) -> None:
         self.genius = Genius(GENIUS_ACCESS_TOKEN)
 
