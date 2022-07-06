@@ -18,3 +18,4 @@ venv/
 # Testing
 .coverage
 coverage
+tmp.py
