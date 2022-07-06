@@ -7,10 +7,9 @@
 Python wrapper for genius.com's API
 
 
-Installation
-------------
+## Setup
 
-**wrap-genius** is supported on Python 3.6+ and it can be installed using [pip](https://pypi.python.org/pypi/pip).
+**wrap-genius** is supported on Python 3.8+ and it can be installed using [pip](https://pypi.python.org/pypi/pip).
 
 ```bash
 pip install wrap-genius
@@ -19,8 +18,7 @@ pip install wrap-genius
 To be able to use it, you'll need to create an API client for [genius.com](https://genius.com/api-clients) and get a **CLIENT ACCESS TOKEN**.
 
 
-Quickstart
-----------
+## Quickstart
 
 Assuming you already have you access token, get an instance of the genius wrapper as follows:
 
