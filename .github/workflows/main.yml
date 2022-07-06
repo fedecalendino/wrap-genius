@@ -39,8 +39,9 @@ jobs:
       - name: Fix coverage xml path
         run: |
           sed -i "s@${GITHUB_WORKSPACE}@/github/workspace/@g" ./coverage.xml
-        
+
       - name: SonarCloud scan
+        if: matrix.python-version == '3.8'
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
           SONAR_TOKEN: ${{ secrets.TOKEN_SONAR }}
