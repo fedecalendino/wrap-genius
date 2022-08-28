@@ -40,7 +40,6 @@ class SongTest(TestCase):
         self.assertIn("9W44NWYwa1g", media["youtube"].url)
 
     def test_lyrics(self):
-        self.skipTest("flaky")
         song = self.genius.get_song(3027414)
 
         self.assertEqual(song.title, "Andromeda")

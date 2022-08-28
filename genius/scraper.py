@@ -1,7 +1,10 @@
+import logging
 from typing import List
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString
+
+logger = logging.getLogger(__name__)
 
 
 def _get_soup(url: str, lower=False) -> BeautifulSoup:
@@ -11,6 +14,18 @@ def _get_soup(url: str, lower=False) -> BeautifulSoup:
         content = content.lower()
 
     return BeautifulSoup(content, features="html.parser")
+
+
+def _extract_lyrics(current) -> List[str]:
+    if type(current) is NavigableString:
+        return [str(current)]
+
+    lines = []
+
+    for children in current.children:
+        lines += _extract_lyrics(children)
+
+    return lines
 
 
 def get_lyrics(url: str, attemps_left=3) -> List[str]:
@@ -32,9 +47,9 @@ def get_lyrics(url: str, attemps_left=3) -> List[str]:
         return []
 
     try:
-        soup = _get_soup(url)
-        div = soup.find("div", attrs={"class": "lyrics"})
-
-        return div.text.strip().split("\n")
-    except:
+        soup = _get_soup(f"{url}")
+        div = soup.find("div", attrs={"data-lyrics-container": "true"})
+        return _extract_lyrics(div)
+    except Exception as exc:
+        logger.error("Failed to fetch lyrics: %s", exc)
         return get_lyrics(url, attemps_left - 1)
