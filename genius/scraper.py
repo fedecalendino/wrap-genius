@@ -16,7 +16,7 @@ def _get_soup(url: str, lower=False) -> BeautifulSoup:
     return BeautifulSoup(content, features="html.parser")
 
 
-def _extract_lyrics(current) -> str:
+def _extract_lyrics(current) -> List[str]:
     if type(current) is NavigableString:
         return [str(current)]
 
