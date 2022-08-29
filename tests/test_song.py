@@ -41,7 +41,7 @@ class SongTest(TestCase):
 
     def test_lyrics(self):
         self.skipTest("Flaky test")
-        
+
         song = self.genius.get_song(3027414)
 
         self.assertEqual(song.title, "Andromeda")
