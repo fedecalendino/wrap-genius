@@ -25,7 +25,7 @@ class SongTest(TestCase):
 
         featured = song.features[0]
         self.assertEqual(featured.id, 241761)
-        self.assertEqual(featured.name, "Shelley FKA DRAM")
+        self.assertEqual(featured.name, "DRAM")
 
         writers = {writer.id: writer.name for writer in song.writers}
 
@@ -33,7 +33,7 @@ class SongTest(TestCase):
         self.assertEqual(writers[1974], "Damon Albarn")
 
         self.assertIn(241761, writers)
-        self.assertEqual(writers[241761], "Shelley FKA DRAM")
+        self.assertEqual(writers[241761], "DRAM")
 
         media = song.media
         self.assertIn("1217912232", media["apple-music"].url)

@@ -51,8 +51,13 @@ def get_lyrics(url: str, attemps_left=3) -> List[str]:
 
     try:
         soup = _get_soup(f"{url}")
-        div = soup.find("div", attrs={"data-lyrics-container": "true"})
-        return "".join(_extract_lyrics(div)).split("\n")
+
+        lyrics = []
+
+        for div in soup.find_all("div", attrs={"data-lyrics-container": "true"}):
+            lyrics += _extract_lyrics(div)
+
+        return "".join(lyrics).split("\n")
     except Exception as exc:
         logger.error("Failed to fetch lyrics: %s", exc)
         return get_lyrics(url, attemps_left - 1)
