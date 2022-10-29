@@ -79,6 +79,22 @@ class API:
             sort=sort,
         ).get("songs", [])
 
+    def get_album_songs(
+        self,
+        album_id: int,
+        page: int = 1,
+        per_page: int = 50,
+    ) -> List[Dict]:
+        assert album_id
+        assert page > 0
+        assert 51 > per_page > 1
+
+        return self(
+            service=f"albums/{album_id}/tracks",
+            page=page,
+            per_page=per_page,
+        ).get("tracks", [])
+
     def search(self, text: str, page: int = 1, per_page: int = 20) -> Iterator[Dict]:
         assert text
         assert page > 0
@@ -155,6 +171,35 @@ class Genius:
             self.api.get_artist_songs(artist_id, page, per_page, sort),
         )
 
+    def get_album_songs(
+        self,
+        album_id: int,
+        page: int = 1,
+        per_page: int = 50,
+    ) -> Iterator[Song]:
+        """
+        Retrieve the songs of an album.
+
+        Parameters
+        ----------
+        album_id: int
+            ID of the album.
+        page: int
+            Desired page.
+        per_page: int
+            Amount of songs per page.
+
+        Returns
+        -------
+        Iterator[genius.classes.song.Song]
+            Songs of the artist.
+        """
+
+        return map(
+            lambda track: Song(self, track["song"]),
+            self.api.get_album_songs(album_id, page, per_page),
+        )
+
     def get_all_artist_songs(
         self, artist_id: int, sort: str = "title"
     ) -> Iterator[Song]:
@@ -178,6 +223,31 @@ class Genius:
         while True:
             page += 1
             songs = list(self.get_artist_songs(artist_id, page=page, sort=sort))
+
+            if not songs:
+                break
+
+            yield from songs
+
+    def get_all_album_songs(self, album_id: int) -> Iterator[Song]:
+        """
+        Retrieve the all the songs of an artist.
+
+        Parameters
+        ----------
+        album_id: int
+            ID of the album.
+
+        Yields
+        -------
+        genius.classes.song.Song
+            Song of the artist.
+        """
+        page = 0
+
+        while True:
+            page += 1
+            songs = list(self.get_album_songs(album_id, page=page))
 
             if not songs:
                 break
