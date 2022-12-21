@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "wrap-genius"
-description = "Python wrapper for api.genius.com"
+description = "Unofficial python wrapper for api.genius.com"
 documentation = "https://github.com/fedecalendino/wrap-genius/blob/main/README.md"
 homepage = "https://github.com/fedecalendino/wrap-genius"
 license = "MIT"
 readme = "README.md"
-version = "1.8.0"
+version = "1.8.1"
 
 authors = [
   "Fede Calendino <fede@calendino.com>",
