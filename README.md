@@ -20,75 +20,101 @@ To be able to use it, you'll need to create an API client for [genius.com](https
 
 ## Quickstart
 
-Assuming you already have you access token, get an instance of the genius wrapper as follows:
+The `genius` wrapper library provides a convenient interface to interact with the Genius API, allowing you to search for songs, artists, and retrieve information about them. This documentation will guide you through the available functionalities of the library with examples.
+
+### Initialization
+
+To start using the `genius` wrapper library, you need to initialize an instance of the `Genius` class. This requires an access token, which you can obtain from the Genius API.
 
 ```python
 from genius import Genius
-g = Genius(access_token="YOUR-TOKEN")
-```   
 
-With this instance you can interact with genius in many ways:
+g = Genius(access_token="YOUR_ACCESS_TOKEN")
+```
+
+### Search All
+
+You can use the `search_all` method to search for songs or artists. It returns a generator that yields search results. Here are some examples:
 
 ```python
-# Search for an artist by name
-artist = g.search_artist("Gorillaz")
-print(artist)
+# Search for an artist
+songs = g.search_all("Dua Lipa", page_limit=1) # page_limit is 10 by default, use conservatively if not needed
+print(next(songs).title)  # Get the first song
+print([song.title for song in songs])  # Get the rest of the songs
+
+# Search for a song
+songs = g.search_all("My Iron Lung", page_limit=1)
+print(next(songs).title)
+
+# Search for a song by an artist
+songs = g.search_all("White Light Gorillaz", page_limit=1)
+print(next(songs).title)
 ```
-```text
->> "Gorillaz (860)"
+Output:
+```
+New Rules
+['Scared to Be Lonely', 'Don’t Start Now', 'IDGAF', 'Levitating', 'One Kiss', 'Blow Your Mind (Mwah)', 'Break My Heart', 'Be the One', 'Kiss and Make Up', 'Physical', 'Levitating (Remix)', 'UN DÍA (ONE DAY)', 'Electricity', 'We’re Good', 'Homesick', 'Dua Lipa', 'Love Again', 'Dua Lipa & BLACKPINK - Kiss and Make Up (Romanized)', 'Hotter Than Hell']
+
+My Iron Lung
+
+White Light
 ```
 
+### Search Artist
 
-```python
-# Get the artist's song by popularity
-for song in artist.songs_by_popularity:
-    print(song)
-```
-```text
->> "Feel Good Inc. (21569)"
->> "Clint Eastwood (1698)"
->> "Saturnz Barz (3027437)"
->> "Ascension (3027418)"
->> "On Melancholy Hill (53533)"
->> ...
-```
-
-
-```python
-# Get the details of a song by its id
-song = g.get_song(song_id=3027414)
-print(song.title_with_featured)
-print(song.release_date_for_display)
-```
-```text
->> "Andromeda (Ft. DRAM)"
->> "March 23, 2017"
-```
-
+You can use the `search_artist` method to search for an artist by their name. It returns an `Artist` object representing the artist. Here is an example:
 
 ```python
-# Get the song album, or the featured artists
+artist = g.search_artist("Radiohead")
+print(artist)  # Artist object
+print(artist.alternate_names)
+print(artist.followers_count)
+print(artist.description[:100] + "..." if len(artist.description) > 100 else artist.description)
+print(artist.header_image_url)
+print(artist.id)
+print(artist.name)
+print(artist.is_verified)
+print(list(itertools.islice(artist.songs, 5)))
+print(list(itertools.islice(artist.songs_by_popularity, 5)))
+print(artist.url)
+```
+
+## Search Song
+
+You can use the `search_all` method to search for a specific song. It returns a generator that yields song objects. Here is an example:
+
+```python
+songs = g.search_all("Karma Police Radiohead", page_limit=1)
+song = next(songs)
+print(song)  # Song object
 print(song.album)
-for featured in song.features:
-    print(featured.name)
-```
-```text
->> "Humanz (335930)"
->> "DRAM (241761)"
+print(song.artist)
+print(song.pageviews)
+print(song.song_art_image_url)
+print(song.title)
+print(song.title_with_featured)
+print(song.hot)
+print(song.description)
+print(song.recording_location)
+print(song.release_date)
+print(song.release_date_for_display)
+print(song.features)
+print(song.media)
+print(song.writers)
+print(song.producers)
+print(song.samples)
+print(song.sampled_in)
+print(song.interpolates)
+print(song.interpolated_by)
+print(song.is_cover)
+print(song.is_live)
+print(song.is_remix)
+print(song.cover_of)
+print(song.covered_by)
+print(song.remix_of)
+print(song.remixed_by)
+print(song.live_version_of)
+print(song.performed_live_as)
+print("\n".join(song.lyrics))
 ```
 
-```python
-# And even, a song's lyrics
-lyrics = song.lyrics
-print('\n'.join(lyrics))
-```
-```text
->> "[Verse 1: 2-D]"
->> "When the pulsing looks to die for"
->> "Take it in your heart now, lover"
->> "When the case is out"
->> "And tired and sodden"
->> "Take it in your heart"
->> "Take it in your heart"
->> ...
-```
