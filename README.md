@@ -146,7 +146,8 @@ print(song)  # Song object
 You can use the `get_all_album_songs` method to retrieve information about an album by the artist's ID. Here is an example:
 
 ```python
-album = g.get_all_album_songs(604)
+song=g.get_song(378195)
+album = song.album
 print(album.name)
 print(album.artist)
 print(album.cover_art_url)
