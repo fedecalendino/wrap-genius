@@ -118,3 +118,40 @@ print(song.performed_live_as)
 print("\n".join(song.lyrics))
 ```
 
+
+## Get Artist Information
+
+You can use the `get_artist` method to retrieve detailed information about an artist by their ID. Here is an example:
+
+```python
+artist = g.get_artist(604)
+print(artist)  # Artist object
+```
+
+
+
+## Get Song Information
+
+You can use the `get_song` method to retrieve detailed information about a song by its ID. Here is an example:
+
+```python
+song = g.get_song(378195)
+print(song)  # Song object
+```
+
+
+
+## Get Album Information
+
+You can use the `get_all_album_songs` method to retrieve information about an album by the artist's ID. Here is an example:
+
+```python
+album = g.get_all_album_songs(604)
+print(album.name)
+print(album.artist)
+print(album.cover_art_url)
+print(album.id)
+print(album.url)
+print(list(album.songs))
+```
+
