@@ -17,7 +17,7 @@ class SongTest(TestCase):
         self.assertEqual(song.artist.name, "Gorillaz")
         self.assertFalse(song._fully_loaded_)
 
-        self.assertEqual(song.album.name, "Humanz (Deluxe)")
+        self.assertEqual(song.album.name, "G Collection")
         self.assertEqual(song.album.artist.name, "Gorillaz")
 
         self.assertEqual(song.release_date_for_display, "March 23, 2017")

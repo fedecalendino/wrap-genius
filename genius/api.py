@@ -1,8 +1,9 @@
 from enum import Enum
 from functools import lru_cache
+from pathlib import Path
 from time import time
 from typing import Any, Dict, Iterator, List, Optional
-
+import json
 import requests
 
 from genius.classes import Artist, Song
@@ -22,33 +23,72 @@ class SortingKeys(str, Enum):
 class API:
     BASE_URL = "https://api.genius.com"
 
-    def __init__(self, access_token: str, verbose: bool = False):
+    def __init__(
+        self, access_token: str, verbose: bool = False, cache_path: str = None
+    ):
         assert access_token
 
-        self.access_token = f"Bearer {access_token}"
-        self.verbose = verbose
+        self.access_token: str = f"Bearer {access_token}"
+        self.verbose: str = verbose
+        self.cache: Path | None = None
+
+        if cache_path:
+            self.cache: str = Path(cache_path)
+
+            if not self.cache.exists():
+                self.cache.parent.mkdir(parents=True, exist_ok=True)
+
+    def read_cache(self, service: str) -> dict[str, Any]:
+        if not self.cache:
+            return None
+
+        path = self.cache / f"{service}.json"
+
+        try:
+            with open(path, "r") as file:
+                return json.load(file)
+        except FileNotFoundError:
+            pass
+
+        return None
+
+    def set_cache(self, service: str, data: dict[str, Any]) -> None:
+        if not self.cache:
+            return
+
+        path = self.cache / f"{service}.json"
+
+        with open(path, "w") as file:
+            json.dump(data, file, indent=2)
 
     @lru_cache
-    def __call__(self, service: str, **params) -> Dict[str, Any]:
-        start = time()
-        url = f"{self.BASE_URL}/{service}"
+    def __call__(self, service: str, **params) -> dict[str, Any]:
+        if cached := self.read_cache(service):
+            return cached
 
         params["text_format"] = "plain"
 
         response = requests.get(
-            url=url, params=params, headers={"Authorization": self.access_token}
-        ).json()
+            url=f"{self.BASE_URL}/{service}",
+            params=params,
+            headers={
+                "Authorization": self.access_token,
+            },
+        )
 
-        if self.verbose:  # pragma: no cover
-            total = time() - start
-            print(f">>> queried {url} in {total:0.4f} seconds")
+        data = response.json()
 
-        meta = response["meta"]
+        if data["meta"]["status"] != 200:
+            raise APIException(
+                status=data["meta"]["status"],
+                message=data["meta"]["message"],
+                url=response.url,
+            )
 
-        if meta["status"] != 200:
-            raise APIException(status=meta["status"], message=meta["message"], url=url)
+        result = data["response"]
+        self.set_cache(service, result)
 
-        return response["response"]
+        return result
 
     def get_song(self, song_id: int) -> Optional[Dict]:
         assert song_id
