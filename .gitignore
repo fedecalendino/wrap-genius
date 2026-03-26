@@ -1,3 +1,6 @@
+tmp.py
+cache
+
 # PyCharm
 .DS_Store
 .idea/
@@ -18,4 +21,3 @@ venv/
 # Testing
 .coverage
 coverage
-tmp.py

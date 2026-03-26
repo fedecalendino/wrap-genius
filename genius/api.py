@@ -1,9 +1,8 @@
-from enum import Enum
-from functools import lru_cache
-from pathlib import Path
-from time import time
-from typing import Any, Dict, Iterator, List, Optional
 import json
+from enum import Enum
+from pathlib import Path
+from typing import Any, Dict, Iterator, List, Optional
+
 import requests
 
 from genius.classes import Artist, Song
@@ -20,29 +19,27 @@ class SortingKeys(str, Enum):
         return self.value
 
 
-class API:
-    BASE_URL = "https://api.genius.com"
+class Cache:
+    def __init__(self, cache_path: str | None) -> None:
+        self.path: Path | None = Path(cache_path) if cache_path else None
 
-    def __init__(
-        self, access_token: str, verbose: bool = False, cache_path: str = None
-    ):
-        assert access_token
+    def key(self, service: str, **params) -> str:
+        key = service
 
-        self.access_token: str = f"Bearer {access_token}"
-        self.verbose: str = verbose
-        self.cache: Path | None = None
+        if page := params.get("page"):
+            key = f"{key}/{page}"
 
-        if cache_path:
-            self.cache: str = Path(cache_path)
+        return key
 
-            if not self.cache.exists():
-                self.cache.parent.mkdir(parents=True, exist_ok=True)
-
-    def read_cache(self, service: str) -> dict[str, Any]:
-        if not self.cache:
+    def load(self, service: str, **params) -> dict[str, Any]:
+        if not self.path:
             return None
 
-        path = self.cache / f"{service}.json"
+        key = self.key(service, **params)
+        path = self.path / f"{key}.json"
+
+        if not path.exists():
+            path.parent.mkdir(parents=True, exist_ok=True)
 
         try:
             with open(path, "r") as file:
@@ -52,18 +49,31 @@ class API:
 
         return None
 
-    def set_cache(self, service: str, data: dict[str, Any]) -> None:
-        if not self.cache:
+    def save(self, service: str, data: dict[str, Any], **params) -> None:
+        if not self.path:
             return
 
-        path = self.cache / f"{service}.json"
+        key = self.key(service, **params)
+        path = self.path / f"{key}.json"
 
-        with open(path, "w") as file:
+        if not path.exists():
+            path.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(path, "w+") as file:
             json.dump(data, file, indent=2)
 
-    @lru_cache
+
+class API:
+    BASE_URL = "https://api.genius.com"
+
+    def __init__(self, access_token: str, cache_path: str | None = None):
+        assert access_token
+
+        self.access_token: str = f"Bearer {access_token}"
+        self.cache: Cache = Cache(cache_path)
+
     def __call__(self, service: str, **params) -> dict[str, Any]:
-        if cached := self.read_cache(service):
+        if cached := self.cache.load(service, **params):
             return cached
 
         params["text_format"] = "plain"
@@ -86,19 +96,24 @@ class API:
             )
 
         result = data["response"]
-        self.set_cache(service, result)
+
+        self.cache.save(service, result, **params)
 
         return result
 
     def get_song(self, song_id: int) -> Optional[Dict]:
         assert song_id
 
-        return self(f"songs/{song_id}").get("song")
+        return self(
+            service=f"songs/{song_id}",
+        ).get("song")
 
     def get_artist(self, artist_id: int) -> Optional[Dict]:
         assert artist_id
 
-        return self(f"artists/{artist_id}").get("artist")
+        return self(
+            service=f"artists/{artist_id}",
+        ).get("artist")
 
     def get_artist_songs(
         self,
@@ -146,8 +161,11 @@ class API:
 
 
 class Genius:
-    def __init__(self, access_token: str, verbose: bool = False):
-        self.api = API(access_token, verbose)
+    def __init__(self, access_token: str, cache_path: str | None = None) -> None:
+        self.api = API(
+            access_token,
+            cache_path=cache_path,
+        )
 
     def get_song(self, song_id: int) -> Song:
         """
