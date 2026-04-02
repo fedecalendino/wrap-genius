@@ -136,6 +136,9 @@ class Song(Base):
                 },
             )
 
+        self.__artists: List["Artist"] = list(
+            map(lambda fa: Artist(self.genius, fa), data.get("primary_artists", []))
+        )
         self.__features: List["Artist"] = list(
             map(lambda fa: Artist(self.genius, fa), data.get("featured_artists", []))
         )
@@ -196,6 +199,10 @@ class Song(Base):
     @lazy_property
     def media(self) -> Dict[str, Media]:
         return self.__media
+
+    @lazy_property
+    def artists(self) -> List["Artist"]:
+        return self.__artists
 
     @lazy_property
     def features(self) -> List["Artist"]:
